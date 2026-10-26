@@ -13,6 +13,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/app-in-uso.webp" fetchpriority="high">
+<!-- Pixel da Meta: só o PageView. O Purchase vem só da CAPI do checkout (Cakto), nunca daqui -->
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '28664656669900616');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=28664656669900616&ev=PageView&noscript=1"/></noscript>
+<!-- visitas da página no painel labofertas -->
+<script async src="https://painel.labofertas.com/api/lp/script?k=2dbd5d1b1673d57186d524a0a39fa6d6"></script>
 <style>
 :root{--noite:#12060b;--noite-2:#1c0910;--vinho:#3d0b1a;--vinho-2:#5a1026;--carmim:#b0123e;--brasa:#ff4d5e;--champ:#e9b98f;--champ-2:#f4d6bc;--creme:#f7ede6;--fumaca:#b9a2a8;--linha:rgba(233,185,143,.18);
   --serif:'Cormorant Garamond',Georgia,serif;--sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif}
