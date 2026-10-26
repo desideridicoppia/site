@@ -41,7 +41,7 @@ h2{font-size:clamp(32px,8.6vw,42px);margin-bottom:18px}
 h2 em,h1 em{font-style:italic;color:var(--champ)}
 h3{font-size:24px;margin-bottom:6px}
 p+p{margin-top:12px}
-.chapeu{font:700 11px var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--champ)}
+.chapeu{font:700 12px var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--champ)}
 .sub{color:var(--fumaca)}
 .btn{display:block;width:100%;text-align:center;text-decoration:none;font:600 italic 25px/1 var(--serif);color:#fff;padding:19px 18px;border-radius:999px;
   background:linear-gradient(180deg,#a1123b,#6e0c28);border:1px solid rgba(255,138,91,.45);box-shadow:0 14px 34px -14px rgba(176,18,62,.9);cursor:pointer}
@@ -55,7 +55,7 @@ p+p{margin-top:12px}
 .marca img{width:36px}
 .marca b{font:600 italic 19px var(--serif);letter-spacing:.02em}
 .hero h1{font-size:clamp(31px,8.8vw,50px);text-align:center;margin:8px 0 18px}
-.hero .chapeu{text-align:center;font-size:10px}
+.hero .chapeu{text-align:center;font-size:12px}
 /* o app em uso grande o bastante para ler a carta (pedido do Vini): o telefone vai ao centro, recortado do topo até a carta inteira.
    Em 375x812 e maiores, título, app e botão cabem na primeira tela; em 360x640 o botão fica logo abaixo */
 .telefono{position:relative;width:min(72vw,270px);margin:0 auto 22px;border-radius:30px;padding:7px;background:linear-gradient(145deg,#2a0d17,#0b0306);
@@ -101,7 +101,7 @@ p+p{margin-top:12px}
 .punti i.on{background:var(--champ);width:20px;border-radius:4px}
 .gioco h3{font-size:22px}
 .gioco p{font-size:14.5px;color:#dcc8c1}
-.gioco .num{font:700 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--champ);margin-bottom:6px}
+.gioco .num{font:700 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--champ);margin-bottom:6px}
 .scorri{font-size:12.5px;color:var(--fumaca);text-align:center}
 .inclusi{list-style:none;display:grid;gap:8px;margin-top:22px}
 .inclusi li{padding-left:28px;position:relative}
@@ -127,7 +127,7 @@ p+p{margin-top:12px}
 .garanzia{display:flex;gap:16px;align-items:center;margin-top:28px;padding:20px;border:1px dashed rgba(233,185,143,.4);border-radius:20px}
 .sigillo{flex:none;width:74px;height:74px;border-radius:50%;display:grid;place-items:center;text-align:center;font:600 30px/1 var(--serif);
   color:var(--noite);background:radial-gradient(circle at 35% 30%,var(--champ-2),var(--champ) 60%,#a77a50)}
-.sigillo small{display:block;font:700 8.5px var(--sans);letter-spacing:.12em}
+.sigillo small{display:block;font:700 12px var(--sans);letter-spacing:.06em}
 
 /* faq */
 details{border-bottom:1px solid var(--linha)}
@@ -161,6 +161,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
  </div>
 </header>
 
+<main>
 <section>
  <div class="wrap">
   <h2>Dopo cena, ognuno col suo telefono. <em>Di nuovo.</em></h2>
@@ -201,7 +202,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
   <p class="chapeu">Cosa ricevete</p>
   <h2>Cinque giochi. <em>Più di 1.300 carte.</em></h2>
   <p class="sub" style="margin-bottom:22px">Scritte in italiano, su tre livelli. Il mazzo non si ripete finché non l'avete girato tutto.</p>
-  <div class="giochi">
+  <div class="giochi" tabindex="0" role="region" aria-label="I cinque giochi">
    <article class="gioco"><img src="img/obbligo.webp" alt="La schermata di Obbligo o Verità" width="540" height="831" loading="lazy"><p class="num">400 carte</p><h3>Obbligo o Verità</h3><p>Dieci turni a testa: la verità vale 1, l'obbligo vale 2. Chi perde paga pegno.</p></article>
    <article class="gioco"><img src="img/ruota.webp" alt="La Ruota dei Desideri" width="540" height="831" loading="lazy"><p class="num">300 sfide</p><h3>Ruota dei Desideri</h3><p>Girate e fate quello che esce, adesso. Con il timer, quando serve.</p></article>
    <article class="gioco"><img src="img/dadi.webp" alt="I Dadi di Coppia" width="540" height="831" loading="lazy"><p class="num">864 combinazioni</p><h3>Dadi di Coppia</h3><p>Un dado dice l'azione, l'altro la zona. Si lancia e si fa.</p></article>
@@ -275,6 +276,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
   <div class="micro"><span>Pagamento unico</span><span>Niente da scaricare</span><span>15 giorni per il rimborso</span></div>
  </div>
 </section>
+</main>
 
 <footer>
  <div class="wrap">
