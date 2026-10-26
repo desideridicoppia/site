@@ -43,13 +43,13 @@ p+p{margin-top:12px}
 .marca b{font:600 italic 19px var(--serif);letter-spacing:.02em}
 .hero h1{font-size:clamp(31px,8.8vw,50px);text-align:center;margin:8px 0 18px}
 .hero .chapeu{text-align:center;font-size:10px}
-/* a dobra do celular (360x640) tem de mostrar o título, o app em uso e o botão: o telefone fica ao lado do texto */
-.hero-riga{display:grid;grid-template-columns:43% 1fr;gap:16px;align-items:center;margin-bottom:20px}
-.hero .lead{color:#e9d7d0;font-size:15px;line-height:1.5}
-.hero .lead b{display:block;font:600 italic 21px/1.15 var(--serif);color:var(--champ-2);margin-bottom:8px}
-.telefono{position:relative;border-radius:26px;padding:6px;background:linear-gradient(145deg,#2a0d17,#0b0306);
-  box-shadow:0 0 0 1px rgba(233,185,143,.25),0 24px 50px -18px rgba(176,18,62,.6)}
-.telefono video,.telefono img{border-radius:21px;width:100%;aspect-ratio:390/720;object-fit:cover;object-position:top;background:#1c0910}
+/* o app em uso grande o bastante para ler a carta (pedido do Vini): o telefone vai ao centro, recortado do topo até a carta inteira.
+   Em 375x812 e maiores, título, app e botão cabem na primeira tela; em 360x640 o botão fica logo abaixo */
+.telefono{position:relative;width:min(72vw,270px);margin:0 auto 22px;border-radius:30px;padding:7px;background:linear-gradient(145deg,#2a0d17,#0b0306);
+  box-shadow:0 0 0 1px rgba(233,185,143,.25),0 26px 56px -18px rgba(176,18,62,.6)}
+.telefono video,.telefono img{border-radius:24px;width:100%;aspect-ratio:390/700;object-fit:cover;object-position:top;background:#1c0910}
+.hero .lead{color:#e9d7d0;font-size:15.5px;text-align:center;max-width:420px;margin:18px auto 0}
+.hero .lead b{font:600 italic 21px/1.2 var(--serif);color:var(--champ-2)}
 .nota-vsl{text-align:center;font-size:12px;color:var(--fumaca);margin:-14px 0 22px}
 
 /* problema */
@@ -76,8 +76,16 @@ p+p{margin-top:12px}
 /* cosa ricevete */
 .giochi{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;padding:6px 20px 18px;margin:0 -20px;scrollbar-width:none}
 .giochi::-webkit-scrollbar{display:none}
-.gioco{flex:0 0 76%;max-width:300px;scroll-snap-align:start;background:var(--noite-2);border:1px solid var(--linha);border-radius:22px;padding:14px 14px 18px}
-.gioco img{border-radius:16px;aspect-ratio:390/600;object-fit:cover;object-position:top;width:100%;margin-bottom:14px;background:#1c0910}
+.giochi.trascina{scroll-snap-type:none;cursor:grabbing}
+.gioco{flex:0 0 72%;max-width:280px;scroll-snap-align:start;background:var(--noite-2);border:1px solid var(--linha);border-radius:22px;padding:12px 12px 18px;user-select:none}
+/* a tela inteira do app, sem recorte: é a prova de que o jogo existe */
+.gioco img{border-radius:16px;width:100%;height:auto;margin-bottom:14px;background:#1c0910;pointer-events:none}
+.comandi{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:4px}
+.comandi button{width:44px;height:44px;border-radius:50%;border:1px solid var(--linha);background:var(--noite-2);color:var(--champ);font:600 22px var(--serif);cursor:pointer}
+.comandi button:disabled{opacity:.3;cursor:default}
+.punti{display:flex;gap:7px}
+.punti i{width:7px;height:7px;border-radius:50%;background:rgba(233,185,143,.28);transition:.2s}
+.punti i.on{background:var(--champ);width:20px;border-radius:4px}
 .gioco h3{font-size:22px}
 .gioco p{font-size:14.5px;color:#dcc8c1}
 .gioco .num{font:700 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--champ);margin-bottom:6px}
@@ -129,16 +137,14 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
   <div class="marca"><img src="img/labios-320.webp" alt="" width="44" height="28"><b>Desideri di Coppia</b></div>
   <p class="chapeu">Giochi di coppia · solo per adulti</p>
   <h1>Certe cose è difficile chiederle. <em>Stasera le chiede il gioco.</em></h1>
-  <div class="hero-riga">
-   <div class="telefono">
-    <video autoplay muted loop playsinline preload="auto" poster="img/app-in-uso.webp" aria-label="Il gioco in uso: la carta si gira e la ruota gira">
-     <source src="img/app-in-uso.mp4" type="video/mp4">
-    </video>
-   </div>
-   <p class="lead"><b>Il gioco fa le proposte al posto vostro.</b>Obbligo o verità, la ruota, i dadi e il match dei desideri. In due, sullo stesso telefono.</p>
+  <div class="telefono">
+   <video autoplay muted loop playsinline preload="auto" poster="img/app-in-uso.webp" aria-label="Il gioco in uso: la carta si gira e la ruota gira">
+    <source src="img/app-in-uso.mp4" type="video/mp4">
+   </video>
   </div>
   <a class="btn checkout" href="#">Giochiamo stasera</a>
   <div class="micro"><span>Pagamento unico</span><span>Niente da scaricare</span><span>15 giorni per il rimborso</span></div>
+  <p class="lead"><b>Il gioco fa le proposte al posto vostro.</b> Obbligo o verità, la ruota, i dadi e il match dei desideri: in due, sullo stesso telefono.</p>
  </div>
 </header>
 
@@ -189,7 +195,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
    <article class="gioco"><img src="img/match.webp" alt="Il risultato del Match dei Desideri" width="540" height="831" loading="lazy"><p class="num">300 desideri</p><h3>Match dei Desideri</h3><p>Rispondete in segreto. Compare solo quello che avete scelto in comune.</p></article>
    <article class="gioco"><img src="img/quiz.webp" alt="Una domanda di Quanto mi conosci" width="540" height="831" loading="lazy"><p class="num">300 domande</p><h3>Quanto mi conosci</h3><p>Indovinate le risposte dell'altra persona. Si ride, e si scopre sempre qualcosa.</p></article>
   </div>
-  <p class="scorri">Scorrete per vedere tutti i giochi</p>
+  <div class="comandi"><button type="button" class="prev" aria-label="Gioco precedente">‹</button><div class="punti"></div><button type="button" class="next" aria-label="Gioco successivo">›</button></div>
   <ul class="inclusi">
    <li>Le vostre carte: create obblighi e verità e aggiungeteli al gioco</li>
    <li>Preferiti: salvate le carte che volete rifare</li>
@@ -265,6 +271,37 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
 </footer>
 
 <script>
+/* carrossel dos jogos: setas, pontos e arrastar com o mouse (no celular o dedo já rola sozinho) */
+(function () {
+  var trilho = document.querySelector('.giochi'), cards = trilho.querySelectorAll('.gioco');
+  var punti = document.querySelector('.punti'), prev = document.querySelector('.comandi .prev'), next = document.querySelector('.comandi .next');
+  cards.forEach(function () { punti.appendChild(document.createElement('i')); });
+  var passo = function () { return cards[1].offsetLeft - cards[0].offsetLeft; };
+  var atual = function () { return Math.round(trilho.scrollLeft / passo()); };
+  var marca = function () {
+    var i = Math.min(atual(), cards.length - 1), fim = trilho.scrollLeft + trilho.clientWidth >= trilho.scrollWidth - 4;
+    punti.querySelectorAll('i').forEach(function (p, k) { p.classList.toggle('on', k === (fim ? cards.length - 1 : i)); });
+    prev.disabled = trilho.scrollLeft < 4; next.disabled = fim;
+  };
+  /* clique rápido no meio da animação soma: o destino é o card, não a posição atual */
+  var alvo = null, solta;
+  var vai = function (d) {
+    alvo = Math.max(0, Math.min(cards.length - 1, (alvo === null ? atual() : alvo) + d));
+    trilho.scrollTo({ left: alvo * passo(), behavior: 'smooth' });
+    clearTimeout(solta); solta = setTimeout(function () { alvo = null; }, 700);
+  };
+  prev.addEventListener('click', function () { vai(-1); });
+  next.addEventListener('click', function () { vai(1); });
+  trilho.addEventListener('scroll', function () { requestAnimationFrame(marca); }, { passive: true });
+  var x0, s0, arrasta = false;
+  trilho.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; arrasta = true; x0 = e.clientX; s0 = trilho.scrollLeft; trilho.classList.add('trascina'); });
+  window.addEventListener('pointermove', function (e) { if (arrasta) trilho.scrollLeft = s0 - (e.clientX - x0); });
+  window.addEventListener('pointerup', function () {
+    if (!arrasta) return; arrasta = false; trilho.classList.remove('trascina');
+    trilho.scrollTo({ left: Math.round(trilho.scrollLeft / passo()) * passo(), behavior: 'smooth' });
+  });
+  marca();
+})();
 /* o link do checkout leva junto os parâmetros do anúncio (utm, fbclid), para o rastreio fechar a venda */
 (function () {
   var q = location.search.slice(1);
