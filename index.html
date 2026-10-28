@@ -523,6 +523,20 @@ document.querySelector('.altri').addEventListener('click', function () {
   document.querySelectorAll('.commento[hidden]').forEach(function (c) { c.hidden = false; c.classList.add('visto'); });
   this.remove();
 });
+/* teste do checkout: metade de quem chega compra pela Cakto, metade pela Hotmart, e quem volta cai no mesmo lado */
+(function () {
+  var HOTMART = 'https://pay.hotmart.com/W108239351D?checkoutMode=10';   // o "Copiar link" do Checkout Builder: sem checkoutMode=10 os bumps somem
+  var lado;
+  try { lado = localStorage.getItem('dc_checkout'); } catch (e) {}
+  if (lado !== 'cakto' && lado !== 'hotmart') {
+    lado = Math.random() < 0.5 ? 'cakto' : 'hotmart';
+    try { localStorage.setItem('dc_checkout', lado); } catch (e) {}
+  }
+  if (lado !== 'hotmart') return;
+  document.querySelectorAll('a.checkout').forEach(function (a) {
+    if (a.getAttribute('href') !== '#') a.href = HOTMART;
+  });
+})();
 /* o link do checkout leva junto os parâmetros do anúncio (utm, fbclid), para o rastreio fechar a venda */
 (function () {
   var q = location.search.slice(1);
