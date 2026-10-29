@@ -25,6 +25,15 @@
   fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=28664656669900616&ev=PageView&noscript=1"/></noscript>
+<!-- trava da VSL: o botão e o resto da página só aparecem depois que o vídeo fala o preço. Quem já liberou
+     (ou abre com ?ver) vê tudo; sem JavaScript, a classe nunca entra e a página aparece inteira -->
+<script>
+  /* ?reset zera o que o aparelho lembra (quiz, trava, ponto do vídeo): para testar como visita nova */
+  try { if (/[?&]reset\b/.test(location.search)) Object.keys(localStorage).forEach(function (k) { if (k.indexOf('dc_') === 0) localStorage.removeItem(k); }); } catch (e) {}
+  try { if (!/[?&]ver\b/.test(location.search) && localStorage.getItem('dc_liberado') !== '1') document.documentElement.classList.add('trava'); } catch (e) {}
+  /* quiz antes da VSL: só na primeira visita; quem já respondeu cai direto no vídeo */
+  try { if (!/[?&]ver\b/.test(location.search) && localStorage.getItem('dc_quiz') !== '1') document.documentElement.classList.add('quiz'); } catch (e) {}
+</script>
 <!-- visitas da página no painel labofertas -->
 <script async src="https://painel.labofertas.com/api/lp/script?k=2dbd5d1b1673d57186d524a0a39fa6d6"></script>
 <style>
@@ -86,6 +95,37 @@ h3{font-size:24px;margin-bottom:6px}
   background:rgba(18,6,11,.78);color:#fff;text-align:center;font:700 18px/1.3 var(--sans)}
 .vsl .riprendi button{width:min(80%,260px);padding:13px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:transparent;color:#fff;font:700 15px var(--sans);cursor:pointer}
 .vsl .riprendi button.si{background:#9b1238;border-color:#c0526f}
+/* barra de progresso, como no VTurb: aparece com o som ligado e anda mais rápido no começo, para o vídeo parecer curto */
+.vsl .barra{position:absolute;left:0;right:0;bottom:0;height:7px;background:rgba(255,255,255,.2);pointer-events:none}
+.vsl .barra[hidden]{display:none}
+/* quiz express antes da VSL: tela inteira por cima da página, a VSL carrega por trás. Três perguntas cujas
+   opções a VSL responde todas (desejo e trava), para a pessoa chegar no vídeo já sabendo o que procura */
+#quiz{display:none}
+.quiz body{overflow:hidden}
+.quiz #quiz{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;overflow-y:auto;
+  background:radial-gradient(120% 70% at 50% 0%,#3d0b1a 0%,var(--noite) 70%)}
+#quiz .wrap{width:100%;flex:1;display:flex;flex-direction:column;padding-top:14px;padding-bottom:28px}
+#quiz .pontos{display:flex;justify-content:center;gap:8px;margin:18px 0 30px}
+#quiz .pontos i{width:34px;height:5px;border-radius:9px;background:rgba(233,185,143,.22);transition:background .3s}
+#quiz .pontos i.on{background:var(--champ)}
+#quiz .passo{display:none;flex-direction:column;animation:aparece .45s ease both}
+#quiz .passo.on{display:flex}
+#quiz h2{font-size:clamp(30px,8.6vw,40px);text-align:center;margin-bottom:24px}
+#quiz .opz{display:block;width:100%;margin-bottom:12px;padding:18px 20px;border-radius:16px;text-align:left;cursor:pointer;
+  font:600 17px/1.3 var(--sans);color:var(--creme);background:rgba(255,255,255,.05);border:1px solid var(--linha);transition:background .2s,border-color .2s}
+#quiz .opz:active,#quiz .opz.sel{background:rgba(176,18,62,.45);border-color:#c0526f}
+#quiz .fim{align-items:center;text-align:center;margin-top:auto;margin-bottom:auto}
+#quiz .giro{width:58px;height:58px;border-radius:50%;border:4px solid rgba(233,185,143,.2);border-top-color:var(--champ);margin-bottom:26px;animation:gira .9s linear infinite}
+#quiz .carica{display:block;width:min(70%,260px);height:6px;border-radius:9px;background:rgba(233,185,143,.18);overflow:hidden}
+#quiz .carica i{display:block;height:100%;width:100%;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,#c0526f,#e9b98f)}
+#quiz .fim.on .carica i{animation:enche 2.2s ease-in-out forwards}
+@keyframes gira{to{transform:rotate(360deg)}}
+@keyframes enche{to{transform:scaleX(1)}}
+/* trava: o que vem depois do preço fica fora até a VSL falar o valor, e entra com um fade curto */
+.trava .depois{display:none}
+.liberou .depois{animation:aparece .7s ease both}
+@keyframes aparece{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.vsl .barra i{display:block;height:100%;width:100%;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,#c0526f,#e9b98f)}
 
 /* celular realista para as telas do app: aro de metal, borda preta, ilha, barra de status, botões e brilho do vidro */
 .cel{container-type:inline-size;position:relative;border-radius:16%/7.6%;padding:3.4%;
@@ -238,6 +278,39 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
 </head>
 <body>
 
+<div id="quiz" role="dialog" aria-modal="true" aria-label="Tre domande prima del video">
+ <div class="wrap">
+  <div class="marca"><img src="img/labios-320.webp" alt="" width="44" height="28"><b>Desideri di Coppia</b></div>
+  <div class="pontos" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+  <div class="passo on" data-q="tempo">
+   <h2>Da quanto tempo tu e <em>la tua metà</em> state insieme?</h2>
+   <button class="opz" type="button">Meno di 2 anni</button>
+   <button class="opz" type="button">Da 2 a 5 anni</button>
+   <button class="opz" type="button">Da 5 a 10 anni</button>
+   <button class="opz" type="button">Più di 10 anni</button>
+  </div>
+  <div class="passo" data-q="desiderio">
+   <h2>Cosa vorreste di più, <em>voi due?</em></h2>
+   <button class="opz" type="button">Più intimità</button>
+   <button class="opz" type="button">Più passione</button>
+   <button class="opz" type="button">Divertirci di più insieme</button>
+   <button class="opz" type="button">Uscire dalla routine</button>
+  </div>
+  <div class="passo" data-q="blocco">
+   <h2>Cosa vi blocca, di solito?</h2>
+   <button class="opz" type="button">Non sappiamo cosa fare di diverso</button>
+   <button class="opz" type="button">Uno dei due si vergogna a chiedere</button>
+   <button class="opz" type="button">La sera siamo stanchi e finiamo sul telefono</button>
+   <button class="opz" type="button">Paura di esagerare</button>
+  </div>
+  <div class="passo fim" aria-live="polite">
+   <span class="giro" aria-hidden="true"></span>
+   <h2>Stiamo caricando<br><em>il vostro video…</em></h2>
+   <span class="carica" aria-hidden="true"><i></i></span>
+  </div>
+ </div>
+</div>
+
 <header class="hero">
  <div class="wrap">
   <div class="marca"><img src="img/labios-320.webp" alt="" width="44" height="28"><b>Desideri di Coppia</b></div>
@@ -252,6 +325,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
     <button class="si" type="button" id="continua">Continua da dove eri</button>
     <button type="button" id="dacapo">Guarda dall'inizio</button>
    </div>
+   <span class="barra" id="barra" hidden><i></i></span>
   </div>
   <script>
   /* o player, como o VTurb: toca mudo; o primeiro toque liga o som e volta ao início; depois o toque pausa
@@ -260,15 +334,46 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
     var v = document.getElementById('vsl'), caixa = document.getElementById('caixa'), pausa = document.getElementById('pausa'),
         rip = document.getElementById('riprendi'), CHAVE = 'dc_vsl_' + (v.getAttribute('data-lab-vsl') || 'vsl'), salvo = 0, ultimo = 0;
     try { salvo = +localStorage.getItem(CHAVE) || 0; } catch (e) {}
-    function comSom(t) { caixa.hidden = true; rip.hidden = true; v.muted = false; v.currentTime = t; v.play(); }
+    /* com o quiz na frente o vídeo só carrega, sem tocar mudo por trás: assim o "deram play" do painel é quem
+       terminou o quiz, e a retenção não leva o tempo que a pessoa passou respondendo */
+    if (document.documentElement.classList.contains('quiz')) { v.removeAttribute('autoplay'); v.pause(); }
+    var assistindo = false;   // só conta para a trava o que tocou depois de a pessoa pedir o som
+    function comSom(t) {
+      assistindo = true; caixa.hidden = true; rip.hidden = true; v.muted = false; v.currentTime = t;
+      // se o aparelho barrar o som, toca mudo com a caixa "Tocca per ascoltare": o vídeo nunca fica parado
+      var p = v.play(); if (p) p.catch(function () { v.muted = true; v.play(); caixa.hidden = false; });
+    }
     caixa.addEventListener('click', function () { comSom(0); });
+    /* o fim do quiz: no último toque o som é destravado (play e pausa no mesmo gesto, que o iPhone exige);
+       depois do carregando, o vídeo começa do zero com som */
+    window.dcDestrava = function () { v.pause(); v.currentTime = 0; v.muted = false; var p = v.play(); v.pause(); if (p) p.catch(function () {}); };
+    window.dcSom = function () { comSom(0); };
     document.getElementById('continua').addEventListener('click', function () { comSom(salvo); });
     document.getElementById('dacapo').addEventListener('click', function () { comSom(0); });
     v.addEventListener('click', function () { if (v.muted) return comSom(0); if (v.paused) v.play(); else v.pause(); });
+    var barra = document.getElementById('barra'), fio = barra.firstChild;
+    function anda() {
+      if (v.duration) fio.style.transform = 'scaleX(' + (1 - Math.pow(1 - v.currentTime / v.duration, 1.6)) + ')';
+      if (!v.paused && !v.ended) requestAnimationFrame(anda);
+    }
+    v.addEventListener('playing', function () { if (!v.muted) { barra.hidden = false; anda(); } });
+    v.addEventListener('seeked', anda);
     v.addEventListener('play', function () { pausa.hidden = true; });
     v.addEventListener('pause', function () { if (!v.muted && !v.ended) pausa.hidden = false; });
+    /* libera a página no segundo em que a VSL diz o preço ("Costa 14,90 euro", 72-74 s). Se o vídeo não
+       carregar, libera na hora: a trava nunca pode deixar alguém sem o botão */
+    var PRECO = 74;
+    function libera() {
+      var h = document.documentElement;
+      if (!h.classList.contains('trava')) return;
+      h.classList.remove('trava'); h.classList.add('liberou');
+      try { localStorage.setItem('dc_liberado', '1'); } catch (e) {}
+    }
+    v.addEventListener('error', libera, true);
+    if (salvo >= PRECO) libera();
     v.addEventListener('timeupdate', function () {
-      if (v.muted || v.currentTime - ultimo < 2) return;
+      if (assistindo && !v.muted && v.currentTime >= PRECO) libera();
+      if (!assistindo || v.muted || v.currentTime - ultimo < 2) return;
       ultimo = v.currentTime;
       try { localStorage.setItem(CHAVE, v.ended ? 0 : Math.floor(v.currentTime)); } catch (e) {}
     });
@@ -280,12 +385,12 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
     if (salvo > 5) { v.removeAttribute('autoplay'); v.pause(); caixa.hidden = true; rip.hidden = false; }
   })();
   </script>
-  <a class="btn checkout" href="https://pay.cakto.com.br/6com3cr">Voglio i giochi</a>
-  <div class="micro"><span>Pagamento unico</span><span>Niente da scaricare</span><span>15 giorni per il rimborso</span></div>
+  <a class="btn checkout depois" href="https://pay.cakto.com.br/6com3cr">Voglio i giochi</a>
+  <div class="micro depois"><span>Pagamento unico</span><span>Niente da scaricare</span><span>15 giorni per il rimborso</span></div>
  </div>
 </header>
 
-<main>
+<main class="depois">
 <section>
  <div class="wrap">
   <h2 class="rivela">Dopo cena, ognuno col suo telefono. <em>Di nuovo.</em></h2>
@@ -479,6 +584,33 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
  </div>
 </footer>
 
+<script>
+/* quiz: um toque por pergunta, sem voltar. As respostas ficam no aparelho (dc_quiz_risposte) para um dia irem
+   ao painel. A última resposta destrava o som, mostra o carregando e abre o vídeo sozinha. */
+(function () {
+  var q = document.getElementById('quiz'); if (!q) return;
+  var passos = q.querySelectorAll('.passo'), pontos = q.querySelectorAll('.pontos i'), resp = {}, i = 0;
+  function vai(n) {
+    passos[i].classList.remove('on'); i = n; passos[i].classList.add('on');
+    pontos.forEach(function (p, k) { p.classList.toggle('on', k <= Math.min(i, pontos.length - 1)); });
+    q.scrollTop = 0;
+  }
+  q.querySelectorAll('.opz').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var passo = b.closest('.passo'); if (passo.dataset.feito) return; passo.dataset.feito = 1;
+      b.classList.add('sel'); resp[passo.dataset.q] = b.textContent;
+      var ultima = i + 1 === passos.length - 1;
+      if (ultima && window.dcDestrava) window.dcDestrava();
+      setTimeout(function () { vai(i + 1); if (ultima) setTimeout(abre, 2300); }, 260);
+    });
+  });
+  function abre() {
+    try { localStorage.setItem('dc_quiz', '1'); localStorage.setItem('dc_quiz_risposte', JSON.stringify(resp)); } catch (e) {}
+    document.documentElement.classList.remove('quiz'); window.scrollTo(0, 0);
+    if (window.dcSom) window.dcSom();
+  }
+})();
+</script>
 <script>
 /* a mesma carta nos três níveis: vira sozinha a cada 3,5 s enquanto aparece; o toque num nível para a troca automática */
 (function () {
