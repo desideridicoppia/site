@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/vsl2.webp" fetchpriority="high">
+<link rel="preload" as="image" href="img/vsl4.webp" fetchpriority="high">
 <!-- Pixel da Meta: só o PageView. O Purchase vem só da CAPI do checkout (Cakto), nunca daqui -->
 <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -66,8 +66,9 @@ h3{font-size:24px;margin-bottom:6px}
 .marca img{width:30px}
 .marca b{font:600 italic 17px var(--serif);letter-spacing:.02em}
 .hero h1{font-size:clamp(25px,6.6vw,38px);line-height:1.08;text-align:center;margin:2px 0 10px}
-/* a VSL: sem moldura, larga, 9:16; a altura nunca passa de 74% da tela, para o botão caber */
-.vsl{position:relative;width:min(100%,calc(74svh * 9 / 16),440px);margin:0 auto 14px;border-radius:18px;overflow:hidden;
+/* a VSL: sem moldura, 9:16, a peça principal da página: passa da margem do texto e vai quase de borda a
+   borda, com altura até 96% da tela (o Vini pediu maior; o botão fica logo abaixo) */
+.vsl{--l:min(calc(100vw - 16px),calc(96svh * 9 / 16),480px);position:relative;width:var(--l);margin:0 0 14px calc(50% - var(--l) / 2);border-radius:18px;overflow:hidden;
   background:#1c0910;box-shadow:0 0 0 1px rgba(233,185,143,.22),0 24px 50px -20px rgba(176,18,62,.55)}
 .vsl video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;cursor:pointer}
 /* a caixa do começo, como no VTurb: o vídeo já está tocando mudo; o toque liga o som e volta ao início */
@@ -111,22 +112,22 @@ h3{font-size:24px;margin-bottom:6px}
 .bolle span:last-child{justify-self:end;background:#3a7bfd;color:#fff}
 .svolta{font:600 italic 27px/1.2 var(--serif);color:var(--champ)}
 
-/* carrossel dos jogos */
-.giochi{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;padding:6px 20px 18px;margin:0 -20px;scrollbar-width:none}
-.giochi::-webkit-scrollbar{display:none}
-.giochi.trascina{scroll-snap-type:none;cursor:grabbing}
-.gioco{flex:0 0 80%;max-width:300px;scroll-snap-align:start;background:var(--noite);border:1px solid var(--linha);border-radius:22px;padding:12px 12px 16px;user-select:none}
-/* a tela inteira do app, sem recorte: é a prova de que o jogo existe */
-.gioco img{border-radius:16px;width:100%;height:auto;margin-bottom:12px;background:#1c0910;pointer-events:none}
-.gioco h3{font-size:23px;margin:0}
-.gioco p{font-size:14.5px;color:#dcc8c1}
-.gioco .num{font:700 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--champ);margin-bottom:4px}
-.comandi{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:4px}
-.comandi button{width:44px;height:44px;border-radius:50%;border:1px solid var(--linha);background:var(--noite);color:var(--champ);font:600 22px var(--serif);cursor:pointer}
-.comandi button:disabled{opacity:.3;cursor:default}
-.punti{display:flex;gap:7px}
-.punti i{width:7px;height:7px;border-radius:50%;background:rgba(233,185,143,.28);transition:.2s}
-.punti i.on{background:var(--champ);width:20px;border-radius:4px}
+/* Cosa ricevete em grade de duas colunas, compacta como a página de referência (Vini, 2026-10-29):
+   o jogo principal com a tela do app, e os 8 bônus em blocos curtos com ícone */
+.principali{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:6px}
+.princ{background:var(--noite);border:1px solid var(--linha);border-radius:18px;overflow:hidden}
+.princ img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:top;background:#1c0910}
+.princ div{padding:10px 12px 13px}
+.princ h3{font-size:18px;line-height:1.12;margin:0 0 4px}
+.princ p{font-size:13.5px;line-height:1.35;color:#dcc8c1;margin:0}
+.num{font:700 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--champ);margin:0 0 4px}
+.bonus-titolo{margin:28px 0 0}
+.griglia{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.tile{padding:12px 12px 13px;border-radius:16px;background:linear-gradient(135deg,rgba(176,18,62,.18),rgba(28,9,16,.65));border:1px solid var(--linha)}
+.tile .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--vinho);color:var(--champ);margin-bottom:8px}
+.tile .ic svg{width:20px;height:20px}
+.tile h3{font-size:16.5px;line-height:1.15;margin:0 0 3px}
+.tile p{font-size:13px;line-height:1.35;color:#dcc8c1;margin:0}
 
 /* níveis: a mesma carta em três temperaturas, troca sozinha até a pessoa tocar */
 .livelli{display:flex;gap:8px;justify-content:center;margin:22px 0 18px}
@@ -242,8 +243,8 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
   <div class="marca"><img src="img/labios-320.webp" alt="" width="44" height="28"><b>Desideri di Coppia</b></div>
   <h1>Stasera, invece del telefono, <em>giocate insieme.</em></h1>
   <div class="vsl">
-   <video id="vsl" data-lab-vsl="vsl-v2-pitch-2min" autoplay muted playsinline preload="auto" poster="img/vsl2.webp" aria-label="Video: come funziona Desideri di Coppia, in due minuti">
-    <source src="img/vsl2.mp4" type="video/mp4">
+   <video id="vsl" data-lab-vsl="vsl-v4-diretta" autoplay muted playsinline preload="auto" poster="img/vsl4.webp" aria-label="Video: come funziona Desideri di Coppia, in poco più di un minuto">
+    <source src="img/vsl4.mp4" type="video/mp4">
    </video>
    <button class="caixa" id="caixa" type="button">Il video è già iniziato<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg><small>Tocca per ascoltare</small></button>
    <span class="pausa" id="pausa" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span>
@@ -279,7 +280,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
     if (salvo > 5) { v.removeAttribute('autoplay'); v.pause(); caixa.hidden = true; rip.hidden = false; }
   })();
   </script>
-  <a class="btn" href="#offerta">Giochiamo stasera</a>
+  <a class="btn checkout" href="https://pay.cakto.com.br/6com3cr">Voglio i giochi</a>
   <div class="micro"><span>Pagamento unico</span><span>Niente da scaricare</span><span>15 giorni per il rimborso</span></div>
  </div>
 </header>
@@ -303,15 +304,23 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
 <section class="tom-2">
  <div class="wrap">
   <div class="chapeu rivela">Cosa ricevete</div>
-  <h2 class="rivela">Cinque giochi. <em>Più di 1.400 carte.</em></h2>
-  <div class="giochi" tabindex="0" role="region" aria-label="I cinque giochi">
-   <article class="gioco"><img src="img/obbligo.webp" alt="La schermata di Obbligo o Verità" width="540" height="831" loading="lazy"><p class="num">400 carte</p><h3>Obbligo o Verità</h3><p>Dalla domanda maliziosa al bacio da film. Chi perde paga pegno.</p></article>
-   <article class="gioco"><img src="img/ruota.webp" alt="La Ruota dei Desideri" width="540" height="831" loading="lazy"><p class="num">300 sfide</p><h3>Ruota dei Desideri</h3><p>Girate e fate quello che esce. Adesso, senza rimandare.</p></article>
-   <article class="gioco"><img src="img/dadi.webp" alt="I Dadi di Coppia" width="540" height="831" loading="lazy"><p class="num">864 combinazioni</p><h3>Dadi di Coppia</h3><p>Un dado dice l'azione, l'altro la zona. Si lancia e si fa.</p></article>
-   <article class="gioco"><img src="img/match.webp" alt="Il risultato del Match dei Desideri" width="540" height="831" loading="lazy"><p class="num">300 desideri</p><h3>Match dei Desideri</h3><p>I desideri mai detti ad alta voce, solo quelli in comune.</p></article>
-   <article class="gioco"><img src="img/quiz.webp" alt="Una domanda di Quanto mi conosci" width="540" height="831" loading="lazy"><p class="num">300 domande</p><h3>Quanto mi conosci</h3><p>Quanto vi conoscete davvero? Si scopre sempre qualcosa.</p></article>
+  <h2 class="rivela">Il gioco di coppia completo. <em>Più di 1.400 carte.</em></h2>
+  <div class="principali">
+   <article class="princ rivela"><img src="img/obbligo.webp" alt="La schermata di Obbligo o Verità" width="540" height="1168" loading="lazy"><div><p class="num">400 carte</p><h3>Obbligo o Verità</h3><p>Scegliete e girate la carta: una domanda, una sfida, un bacio.</p></div></article>
+   <article class="princ rivela"><img src="img/ruota.webp" alt="La Ruota dei Desideri" width="540" height="1168" loading="lazy"><div><p class="num">300 sfide</p><h3>Ruota dei Desideri</h3><p>Girate la ruota e fate subito quello che esce.</p></div></article>
   </div>
-  <div class="comandi"><button type="button" class="prev" aria-label="Gioco precedente">‹</button><div class="punti"></div><button type="button" class="next" aria-label="Gioco successivo">›</button></div>
+
+  <h2 class="bonus-titolo rivela">E in più, <em>8 bonus inclusi.</em></h2>
+  <div class="griglia">
+   <article class="tile rivela"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-3.9 0-6.5-2.7-6.5-6.2 0-3.4 2.4-5.4 3.6-8.3.5 1.8 1.5 2.9 2.6 3.4.2-2.8 1.6-5.3 3.8-6.9-.3 2.6.6 4.4 2 6.1 1.2 1.5 1.9 3.2 1.9 5.2 0 4-2.9 6.7-7.4 6.7z"/></svg></span><p class="num">Bonus 1</p><h3>Livello Piccante</h3><p>Il livello più caldo, in tutti i giochi.</p></article>
+   <article class="tile rivela"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="11" height="11" rx="2.5"/><rect x="11" y="3" width="10" height="10" rx="2.5" transform="rotate(15 16 8)"/></svg></span><p class="num">Bonus 2</p><h3>Dadi di Coppia</h3><p>Un dado dice cosa fare, l'altro dove.</p></article>
+   <article class="tile rivela"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></span><p class="num">Bonus 3</p><h3>Match dei Desideri</h3><p>Compaiono solo i desideri in comune.</p></article>
+   <article class="tile rivela"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M10 9.2a2 2 0 1 1 2.6 1.9c-.4.2-.6.5-.6.9v.4M12 14.4v.1"/></svg></span><p class="num">Bonus 4</p><h3>Quanto mi conosci</h3><p>300 domande: chi perde paga pegno.</p></article>
+   <article class="tile rivela"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg></span><p class="num">Bonus 5</p><h3>Le vostre carte</h3><p>Scrivete i vostri obblighi e le vostre domande.</p></article>
+   <article class="tile rivela"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 4 4 7-8"/><path d="M15 8h5v5"/></svg></span><p class="num">Bonus 6</p><h3>Si scalda da solo</h3><p>Ogni 6 carte il livello sale da solo.</p></article>
+   <article class="tile rivela"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l4.2 3.6L12 5l4.3 7.1 4.2-3.6-1.8 9.5H5.3z"/><path d="M5.5 21h13"/></svg></span><p class="num">Bonus 7</p><h3>Partita con penitenza</h3><p>Punteggio, e chi perde paga una penitenza.</p></article>
+   <article class="tile rivela"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><p class="num">Bonus 8</p><h3>App discreta</h3><p>Icona «Desideri», funziona anche senza internet.</p></article>
+  </div>
  </div>
 </section>
 
@@ -364,7 +373,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
    <li class="rivela"><div class="cel"><div class="vetro"><span class="isola"></span><img class="schermo" src="img/passo-carta.webp" alt="Una carta del gioco" width="360" height="640" loading="lazy"></div></div><b>La prima carta</b>e il resto viene da sé</li>
   </ol>
   <p class="facile rivela">Si apre dal telefono. Niente da scaricare, niente registrazione.</p>
-  <a class="btn" href="#offerta" style="margin-top:20px">Giochiamo stasera</a>
+  <a class="btn checkout" href="https://pay.cakto.com.br/6com3cr" style="margin-top:20px">Voglio i giochi</a>
  </div>
 </section>
 
@@ -425,11 +434,11 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
    <p class="unico">Pagamento unico · Vostro per sempre</p>
    <p class="ancora">Meno di un aperitivo in due.</p>
    <ul class="inclusi">
-    <li>I cinque giochi e più di 1.400 carte</li>
-    <li>Tre livelli: Soft, Romantico, Piccante</li>
+    <li>Obbligo o Verità e la Ruota dei Desideri, più di 1.400 carte in tutto</li>
+    <li><b>8 bonus:</b> livello Piccante, Dadi di Coppia, Match dei Desideri, Quanto mi conosci, le vostre carte, si scalda da solo, partita con penitenza, app discreta</li>
     <li>Il link arriva subito per email</li>
    </ul>
-   <a class="btn checkout" href="https://pay.cakto.com.br/6com3cr">Giochiamo stasera</a>
+   <a class="btn checkout" href="https://pay.cakto.com.br/6com3cr">Voglio i giochi</a>
    <p class="pagamenti">Carta o PayPal. Con la carta, 14,90 € in tutto.</p>
   </div>
   <div class="garanzia rivela">
@@ -457,7 +466,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
  <div class="wrap">
   <h2 class="rivela">Stasera, invece del telefono, girate una carta. <em>E vedete dove vi porta.</em></h2>
   <p class="sub" style="margin-bottom:24px">Cinque giochi, 14,90 € una volta sola.</p>
-  <a class="btn checkout" href="https://pay.cakto.com.br/6com3cr">Giochiamo stasera</a>
+  <a class="btn checkout" href="https://pay.cakto.com.br/6com3cr">Voglio i giochi</a>
   <div class="micro"><span>Pagamento unico</span><span>Niente da scaricare</span><span>15 giorni per il rimborso</span></div>
  </div>
 </section>
@@ -471,37 +480,6 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
 </footer>
 
 <script>
-/* carrossel dos jogos: setas, pontos e arrastar com o mouse (no celular o dedo já rola sozinho) */
-(function () {
-  var trilho = document.querySelector('.giochi'), cards = trilho.querySelectorAll('.gioco');
-  var punti = document.querySelector('.punti'), prev = document.querySelector('.comandi .prev'), next = document.querySelector('.comandi .next');
-  cards.forEach(function () { punti.appendChild(document.createElement('i')); });
-  var passo = function () { return cards[1].offsetLeft - cards[0].offsetLeft; };
-  var atual = function () { return Math.round(trilho.scrollLeft / passo()); };
-  var marca = function () {
-    var i = Math.min(atual(), cards.length - 1), fim = trilho.scrollLeft + trilho.clientWidth >= trilho.scrollWidth - 4;
-    punti.querySelectorAll('i').forEach(function (p, k) { p.classList.toggle('on', k === (fim ? cards.length - 1 : i)); });
-    prev.disabled = trilho.scrollLeft < 4; next.disabled = fim;
-  };
-  /* clique rápido no meio da animação soma: o destino é o card, não a posição atual */
-  var alvo = null, solta;
-  var vai = function (d) {
-    alvo = Math.max(0, Math.min(cards.length - 1, (alvo === null ? atual() : alvo) + d));
-    trilho.scrollTo({ left: alvo * passo(), behavior: 'smooth' });
-    clearTimeout(solta); solta = setTimeout(function () { alvo = null; }, 700);
-  };
-  prev.addEventListener('click', function () { vai(-1); });
-  next.addEventListener('click', function () { vai(1); });
-  trilho.addEventListener('scroll', function () { requestAnimationFrame(marca); }, { passive: true });
-  var x0, s0, arrasta = false;
-  trilho.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; arrasta = true; x0 = e.clientX; s0 = trilho.scrollLeft; trilho.classList.add('trascina'); });
-  window.addEventListener('pointermove', function (e) { if (arrasta) trilho.scrollLeft = s0 - (e.clientX - x0); });
-  window.addEventListener('pointerup', function () {
-    if (!arrasta) return; arrasta = false; trilho.classList.remove('trascina');
-    trilho.scrollTo({ left: Math.round(trilho.scrollLeft / passo()) * passo(), behavior: 'smooth' });
-  });
-  marca();
-})();
 /* a mesma carta nos três níveis: vira sozinha a cada 3,5 s enquanto aparece; o toque num nível para a troca automática */
 (function () {
   var niveis = [
@@ -552,20 +530,6 @@ document.querySelector('.altri').addEventListener('click', function () {
   document.querySelectorAll('.commento[hidden]').forEach(function (c) { c.hidden = false; c.classList.add('visto'); });
   this.remove();
 });
-/* teste do checkout: metade de quem chega compra pela Cakto, metade pela Hotmart, e quem volta cai no mesmo lado */
-(function () {
-  var HOTMART = 'https://pay.hotmart.com/W108239351D?checkoutMode=10';   // o "Copiar link" do Checkout Builder: sem checkoutMode=10 os bumps somem
-  var lado;
-  try { lado = localStorage.getItem('dc_checkout'); } catch (e) {}
-  if (lado !== 'cakto' && lado !== 'hotmart') {
-    lado = Math.random() < 0.5 ? 'cakto' : 'hotmart';
-    try { localStorage.setItem('dc_checkout', lado); } catch (e) {}
-  }
-  if (lado !== 'hotmart') return;
-  document.querySelectorAll('a.checkout').forEach(function (a) {
-    if (a.getAttribute('href') !== '#') a.href = HOTMART;
-  });
-})();
 /* o link do checkout leva junto os parâmetros do anúncio (utm, fbclid), para o rastreio fechar a venda */
 (function () {
   var q = location.search.slice(1);
