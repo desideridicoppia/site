@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/vsl.webp" fetchpriority="high">
+<link rel="preload" as="image" href="img/vsl2.webp" fetchpriority="high">
 <!-- Pixel da Meta: só o PageView. O Purchase vem só da CAPI do checkout (Cakto), nunca daqui -->
 <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -59,24 +59,32 @@ h3{font-size:24px;margin-bottom:6px}
 .rivela{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
 .rivela.visto{opacity:1;transform:none}
 
-/* hero */
-.hero{padding:14px 0 40px;background:radial-gradient(120% 70% at 50% 0%,#3d0b1a 0%,var(--noite) 70%)}
-.marca{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px}
-.marca img{width:36px}
-.marca b{font:600 italic 19px var(--serif);letter-spacing:.02em}
-.hero h1{font-size:clamp(31px,8.8vw,50px);text-align:center;margin:8px 0 14px}
-.hero .chapeu{text-align:center;font-size:12px;margin:0}
-.hero .sotto{text-align:center;color:#e9d7d0;font-size:15.5px;line-height:1.4;max-width:330px;margin:-6px auto 16px}
-/* a VSL (9:16) dentro do telefone: começa muda, com legenda em italiano; o toque liga o som e volta ao início */
-.telefono{position:relative;width:min(66vw,250px);margin:0 auto 20px;border-radius:30px;padding:7px;background:linear-gradient(145deg,#2a0d17,#0b0306);
-  box-shadow:0 0 0 1px rgba(233,185,143,.25),0 26px 56px -18px rgba(176,18,62,.6)}
-.telefono video{display:block;border-radius:24px;width:100%;aspect-ratio:9/16;object-fit:cover;background:#1c0910;cursor:pointer}
-.audio{position:absolute;left:50%;top:17%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;padding:12px 18px;border:1px solid rgba(255,255,255,.55);
-  border-radius:999px;background:rgba(18,6,11,.72);color:#fff;font:700 14px var(--sans);white-space:nowrap;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.audio svg{width:20px;height:20px;flex:none}
-.audio[hidden]{display:none}
-/* celular baixo (360x640): o botão de comprar tem de caber na primeira tela; sai o chapéu e o telefone encolhe um pouco */
-@media (max-height:700px){.hero .chapeu{display:none}.hero h1{margin:4px 0 10px}.hero .sotto{font-size:14.5px;margin-bottom:12px}.telefono{width:min(56vw,200px);margin-bottom:14px}}
+/* hero: a VSL é a primeira tela (como as que escalam): título curto em cima, o vídeo em pé ocupando
+   o resto, o botão logo abaixo. O título e o botão juntos não passam de um quarto da tela. */
+.hero{padding:10px 0 34px;background:radial-gradient(120% 70% at 50% 0%,#3d0b1a 0%,var(--noite) 70%)}
+.marca{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px}
+.marca img{width:30px}
+.marca b{font:600 italic 17px var(--serif);letter-spacing:.02em}
+.hero h1{font-size:clamp(25px,6.6vw,38px);line-height:1.08;text-align:center;margin:2px 0 10px}
+/* a VSL: sem moldura, larga, 9:16; a altura nunca passa de 74% da tela, para o botão caber */
+.vsl{position:relative;width:min(100%,calc(74svh * 9 / 16),440px);margin:0 auto 14px;border-radius:18px;overflow:hidden;
+  background:#1c0910;box-shadow:0 0 0 1px rgba(233,185,143,.22),0 24px 50px -20px rgba(176,18,62,.55)}
+.vsl video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;cursor:pointer}
+/* a caixa do começo, como no VTurb: o vídeo já está tocando mudo; o toque liga o som e volta ao início */
+.vsl .caixa{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(82%,300px);padding:18px 14px 16px;border-radius:16px;
+  border:2px solid rgba(255,255,255,.85);background:rgba(155,18,56,.84);color:#fff;text-align:center;cursor:pointer;font:700 19px/1.25 var(--sans)}
+.vsl .caixa svg{display:block;width:46px;height:46px;margin:10px auto}
+.vsl .caixa small{display:block;font-weight:600;font-size:15px}
+.vsl .caixa[hidden],.vsl .pausa[hidden],.vsl .riprendi[hidden]{display:none}
+/* o ícone de pausado: um span, então precisa de display próprio para o círculo existir e o triângulo ficar no centro */
+.vsl .pausa{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;
+  width:84px;height:84px;border-radius:50%;background:rgba(18,6,11,.68);border:2px solid rgba(255,255,255,.75);color:#fff;pointer-events:none}
+.vsl .pausa svg{display:block;width:34px;height:34px;margin-left:5px}
+/* quem volta: continuar de onde parou ou do início */
+.vsl .riprendi{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;
+  background:rgba(18,6,11,.78);color:#fff;text-align:center;font:700 18px/1.3 var(--sans)}
+.vsl .riprendi button{width:min(80%,260px);padding:13px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:transparent;color:#fff;font:700 15px var(--sans);cursor:pointer}
+.vsl .riprendi button.si{background:#9b1238;border-color:#c0526f}
 
 /* celular realista para as telas do app: aro de metal, borda preta, ilha, barra de status, botões e brilho do vidro */
 .cel{container-type:inline-size;position:relative;border-radius:16%/7.6%;padding:3.4%;
@@ -232,25 +240,46 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
 <header class="hero">
  <div class="wrap">
   <div class="marca"><img src="img/labios-320.webp" alt="" width="44" height="28"><b>Desideri di Coppia</b></div>
-  <div class="chapeu">Giochi di coppia · solo per adulti</div>
-  <h1>Stasera, invece di finire ognuno col suo telefono, <em>giocate insieme.</em></h1>
-  <p class="sotto">Domande, sfide e desideri da fare in due, dal romantico al piccante.</p>
-  <div class="telefono">
-   <video id="vsl" data-lab-vsl="vsl-v1-demo-44s" autoplay muted loop playsinline preload="auto" poster="img/vsl.webp" aria-label="Video: come funziona il gioco, in 45 secondi">
-    <source src="img/vsl.mp4" type="video/mp4">
+  <h1>Stasera, invece del telefono, <em>giocate insieme.</em></h1>
+  <div class="vsl">
+   <video id="vsl" data-lab-vsl="vsl-v2-pitch-2min" autoplay muted playsinline preload="auto" poster="img/vsl2.webp" aria-label="Video: come funziona Desideri di Coppia, in due minuti">
+    <source src="img/vsl2.mp4" type="video/mp4">
    </video>
-   <button class="audio" id="audio" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>Attiva l'audio</button>
+   <button class="caixa" id="caixa" type="button">Il video è già iniziato<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg><small>Tocca per ascoltare</small></button>
+   <span class="pausa" id="pausa" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+   <div class="riprendi" id="riprendi" hidden>Hai già iniziato a guardare questo video
+    <button class="si" type="button" id="continua">Continua da dove eri</button>
+    <button type="button" id="dacapo">Guarda dall'inizio</button>
+   </div>
   </div>
   <script>
-  /* o primeiro toque liga o som e recomeça do início; depois, o toque no vídeo pausa e retoma */
+  /* o player, como o VTurb: toca mudo; o primeiro toque liga o som e volta ao início; depois o toque pausa
+     e retoma. Sem controles e sem repetir. Quem volta escolhe continuar de onde parou ou recomeçar. */
   (function () {
-    var v = document.getElementById('vsl'), b = document.getElementById('audio');
-    function liga() { v.muted = false; v.currentTime = 0; v.play(); b.hidden = true; }
-    b.addEventListener('click', liga);
-    v.addEventListener('click', function () { if (v.muted) liga(); else if (v.paused) v.play(); else v.pause(); });
+    var v = document.getElementById('vsl'), caixa = document.getElementById('caixa'), pausa = document.getElementById('pausa'),
+        rip = document.getElementById('riprendi'), CHAVE = 'dc_vsl_' + (v.getAttribute('data-lab-vsl') || 'vsl'), salvo = 0, ultimo = 0;
+    try { salvo = +localStorage.getItem(CHAVE) || 0; } catch (e) {}
+    function comSom(t) { caixa.hidden = true; rip.hidden = true; v.muted = false; v.currentTime = t; v.play(); }
+    caixa.addEventListener('click', function () { comSom(0); });
+    document.getElementById('continua').addEventListener('click', function () { comSom(salvo); });
+    document.getElementById('dacapo').addEventListener('click', function () { comSom(0); });
+    v.addEventListener('click', function () { if (v.muted) return comSom(0); if (v.paused) v.play(); else v.pause(); });
+    v.addEventListener('play', function () { pausa.hidden = true; });
+    v.addEventListener('pause', function () { if (!v.muted && !v.ended) pausa.hidden = false; });
+    v.addEventListener('timeupdate', function () {
+      if (v.muted || v.currentTime - ultimo < 2) return;
+      ultimo = v.currentTime;
+      try { localStorage.setItem(CHAVE, v.ended ? 0 : Math.floor(v.currentTime)); } catch (e) {}
+    });
+    v.addEventListener('ended', function () {
+      try { localStorage.removeItem(CHAVE); } catch (e) {}
+      if (v.muted) { v.currentTime = 0; v.play(); }
+    });
+    /* voltou com o vídeo pela metade: para e pergunta, em vez de tocar mudo de novo */
+    if (salvo > 5) { v.removeAttribute('autoplay'); v.pause(); caixa.hidden = true; rip.hidden = false; }
   })();
   </script>
-  <a class="btn checkout" href="https://pay.cakto.com.br/6com3cr">Giochiamo stasera</a>
+  <a class="btn" href="#offerta">Giochiamo stasera</a>
   <div class="micro"><span>Pagamento unico</span><span>Niente da scaricare</span><span>15 giorni per il rimborso</span></div>
  </div>
 </header>
@@ -274,7 +303,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
 <section class="tom-2">
  <div class="wrap">
   <div class="chapeu rivela">Cosa ricevete</div>
-  <h2 class="rivela">Cinque giochi. <em>Più di 1.300 carte.</em></h2>
+  <h2 class="rivela">Cinque giochi. <em>Più di 1.400 carte.</em></h2>
   <div class="giochi" tabindex="0" role="region" aria-label="I cinque giochi">
    <article class="gioco"><img src="img/obbligo.webp" alt="La schermata di Obbligo o Verità" width="540" height="831" loading="lazy"><p class="num">400 carte</p><h3>Obbligo o Verità</h3><p>Dalla domanda maliziosa al bacio da film. Chi perde paga pegno.</p></article>
    <article class="gioco"><img src="img/ruota.webp" alt="La Ruota dei Desideri" width="540" height="831" loading="lazy"><p class="num">300 sfide</p><h3>Ruota dei Desideri</h3><p>Girate e fate quello che esce. Adesso, senza rimandare.</p></article>
@@ -335,7 +364,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
    <li class="rivela"><div class="cel"><div class="vetro"><span class="isola"></span><img class="schermo" src="img/passo-carta.webp" alt="Una carta del gioco" width="360" height="640" loading="lazy"></div></div><b>La prima carta</b>e il resto viene da sé</li>
   </ol>
   <p class="facile rivela">Si apre dal telefono. Niente da scaricare, niente registrazione.</p>
-  <a class="btn checkout" href="https://pay.cakto.com.br/6com3cr" style="margin-top:20px">Giochiamo stasera</a>
+  <a class="btn" href="#offerta" style="margin-top:20px">Giochiamo stasera</a>
  </div>
 </section>
 
@@ -396,7 +425,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
    <p class="unico">Pagamento unico · Vostro per sempre</p>
    <p class="ancora">Meno di un aperitivo in due.</p>
    <ul class="inclusi">
-    <li>I cinque giochi e più di 1.300 carte</li>
+    <li>I cinque giochi e più di 1.400 carte</li>
     <li>Tre livelli: Soft, Romantico, Piccante</li>
     <li>Il link arriva subito per email</li>
    </ul>
@@ -418,7 +447,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
   <details><summary>Si gioca in due sullo stesso telefono?</summary><p>Sì, a turno, passandovi il telefono. Nel Match ognuno risponde senza vedere le risposte dell'altra persona.</p></details>
   <details><summary>Quanto è spinto?</summary><p>Lo decidete voi. Soft è per ridere, Romantico è coccole e baci, Piccante arriva a carezze, provocazioni e camera da letto. Chi vuole andare oltre trova il livello Senza Censura, che si può aggiungere al momento dell'acquisto.</p></details>
   <details><summary>Posso regalarlo?</summary><p>Sì. Il link arriva alla vostra email: potete inoltrarlo al partner o aprire il gioco insieme. Si apre da qualsiasi telefono, senza registrazione.</p></details>
-  <details><summary>Si può pagare con PayPal?</summary><p>Sì. Con PayPal l'importo è in dollari e lo converte PayPal. Con la carta di credito o di debito il totale è 14,90 €, commissione di servizio inclusa.</p></details>
+  <details><summary>Si può pagare con PayPal?</summary><p>Sì. Si paga con carta di credito o di debito oppure con PayPal.</p></details>
   <details><summary>Va bene per ogni coppia?</summary><p>Sì. Le carte usano i vostri nomi e funzionano per qualsiasi coppia.</p></details>
   <details><summary>E se non ci piace?</summary><p>Avete 15 giorni per chiedere il rimborso completo, dall'email di conferma dell'acquisto.</p></details>
  </div>
