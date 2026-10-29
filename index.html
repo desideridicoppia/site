@@ -278,25 +278,25 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
 </head>
 <body>
 
-<div id="quiz" role="dialog" aria-modal="true" aria-label="Tre domande prima del video">
+<div id="quiz" data-lab-quiz="quiz-express-v1" role="dialog" aria-modal="true" aria-label="Tre domande prima del video">
  <div class="wrap">
   <div class="marca"><img src="img/labios-320.webp" alt="" width="44" height="28"><b>Desideri di Coppia</b></div>
   <div class="pontos" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
-  <div class="passo on" data-q="tempo">
+  <div class="passo on" data-q="tempo" data-lab-pergunta="tempo">
    <h2>Da quanto tempo tu e <em>la tua metà</em> state insieme?</h2>
    <button class="opz" type="button">Meno di 2 anni</button>
    <button class="opz" type="button">Da 2 a 5 anni</button>
    <button class="opz" type="button">Da 5 a 10 anni</button>
    <button class="opz" type="button">Più di 10 anni</button>
   </div>
-  <div class="passo" data-q="desiderio">
+  <div class="passo" data-q="desiderio" data-lab-pergunta="desiderio">
    <h2>Cosa vorreste di più, <em>voi due?</em></h2>
    <button class="opz" type="button">Più intimità</button>
    <button class="opz" type="button">Più passione</button>
    <button class="opz" type="button">Divertirci di più insieme</button>
    <button class="opz" type="button">Uscire dalla routine</button>
   </div>
-  <div class="passo" data-q="blocco">
+  <div class="passo" data-q="blocco" data-lab-pergunta="blocco">
    <h2>Cosa vi blocca, di solito?</h2>
    <button class="opz" type="button">Non sappiamo cosa fare di diverso</button>
    <button class="opz" type="button">Uno dei due si vergogna a chiedere</button>
