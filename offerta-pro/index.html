@@ -74,20 +74,22 @@ h1{font-size:clamp(31px,8.8vw,44px);text-align:center;margin:8px 0 10px}
 .prezzo{font:600 60px/1 var(--serif);color:#fff}
 .prezzo small{font-size:26px}
 .sera{display:inline-block;margin:8px 0 16px;font-size:13.5px;color:var(--champ-2);background:rgba(233,185,143,.1);padding:5px 12px;border-radius:999px}
-/* botões da Cakto: o host é inline e não estica; estilo nos dois níveis (ver cakto-ops) */
-cakto-upsell-buttons,cakto-upsell-accept,cakto-upsell-reject{display:block;width:100%;text-align:center}
-cakto-upsell-accept::part(button){display:block;width:100%;font:700 18px/1.2 var(--sans);color:#fff;padding:19px 18px;border-radius:16px;
-  background:linear-gradient(180deg,#d61f52,#8f0d33);border:1px solid rgba(255,160,140,.5);box-shadow:0 16px 36px -14px rgba(214,31,82,.95);cursor:pointer}
+/* 1 clique da Hotmart: o widget monta os botões num iframe; a reserva são links comuns, para quem chega sem compra em andamento */
+#hotmart-sales-funnel{min-height:10px}
+.reserva[hidden]{display:none}
+.reserva a{display:block;text-decoration:none;text-align:center}
+.reserva .si{width:100%;font:700 18px/1.2 var(--sans);color:#fff;padding:19px 18px;border-radius:16px;
+  background:linear-gradient(180deg,#d61f52,#8f0d33);border:1px solid rgba(255,160,140,.5);box-shadow:0 16px 36px -14px rgba(214,31,82,.95)}
 .btn-prezzo{display:block;margin-top:4px;font-size:15px;font-weight:600}
 .btn-prezzo s{opacity:.65;margin-right:6px}
-cakto-upsell-reject::part(button){display:inline-block;margin-top:14px;padding:8px 6px;font:600 14px var(--sans);color:var(--fumaca);text-decoration:underline;background:none;border:0;cursor:pointer}
+.reserva .no{display:inline-block;margin-top:14px;padding:8px 6px;font:600 14px var(--sans);color:var(--fumaca);text-decoration:underline}
 .fiducia{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
 .fiducia li{padding:10px 6px;border:1px solid var(--linha);border-radius:14px;font-size:12px;line-height:1.35;color:var(--fumaca);text-align:center}
 .fiducia b{display:block;font:600 17px var(--serif);color:var(--creme)}
 .note{margin-top:16px;font-size:12.5px;line-height:1.5;color:var(--fumaca);text-align:center}
 footer{padding:24px 0 30px;border-top:1px solid var(--linha);text-align:center;font-size:12.5px;color:rgba(185,162,168,.75)}
 
-/* barra fixa: leva ao botão da Cakto e some quando ele aparece na tela */
+/* barra fixa: leva aos botões e some quando eles aparecem na tela */
 .barra{position:fixed;left:0;right:0;bottom:0;z-index:9;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(18,6,11,.94);backdrop-filter:blur(8px);border-top:1px solid var(--linha);transition:transform .25s}
 .barra.via{transform:translateY(110%)}
 .barra .wrap{display:flex;align-items:center;gap:12px;padding:0}
@@ -97,7 +99,7 @@ footer{padding:24px 0 30px;border-top:1px solid var(--linha);text-align:center;f
 </style>
 </head>
 <body>
-<div class="confermato" role="status"><span class="ok">✓</span><p><b>Pagamento confermato.</b> Il link del gioco vi arriva per email tra pochi minuti.</p></div>
+<div class="confermato" role="status"><span class="ok">✓</span><p><b>Pagamento confermato.</b> Il gioco si apre subito dopo questa pagina.</p></div>
 <main>
  <div class="wrap">
   <p class="chapeu">Un'ultima cosa prima di aprire il gioco</p>
@@ -148,17 +150,17 @@ footer{padding:24px 0 30px;border-top:1px solid var(--linha);text-align:center;f
    <p class="prezzo">19,90<small> €</small></p>
    <p class="sera">Pagamento unico · per 30 serate fa 66 centesimi a sera</p>
 
-   <cakto-upsell-buttons>
-    <cakto-upsell-accept bg-color="#a1123bff" text-color="#ffffff" upsell-accept-url="https://desideridicoppia.com/grazie/?pro=1" offer-id="ufkhv67" app-base-url="https://app.cakto.com.br" offer-type="upsell" upsell-reject-url="https://desideridicoppia.com/grazie/">Sì, aggiungo Desideri Pro<span class="btn-prezzo"><s>24,90 €</s> 19,90 €</span></cakto-upsell-accept>
-    <cakto-upsell-reject upsell-reject-url="https://desideridicoppia.com/grazie/">No grazie, mi basta il gioco che ho preso</cakto-upsell-reject>
-   </cakto-upsell-buttons>
+   <div id="hotmart-sales-funnel"></div>
+   <div class="reserva" id="reserva" hidden>
+    <a class="si" href="https://pay.hotmart.com/P108279002V">Sì, aggiungo Desideri Pro<span class="btn-prezzo"><s>24,90 €</s> 19,90 €</span></a>
+    <a class="no" href="https://desideridicoppia.com/accesso-h7q2m/">No grazie, mi basta il gioco che ho preso</a>
+   </div>
 
    <ul class="fiducia">
     <li><b>1 clic</b>stessa carta, niente da riscrivere</li>
     <li><b>Subito</b>si sblocca nel gioco che avete preso</li>
     <li><b>15 giorni</b>di garanzia, rimborso dall'email</li>
    </ul>
-   <p class="note">Avete pagato con PayPal? Il pulsante vi porta alla pagina di pagamento di Desideri Pro.</p>
   </div>
  </div>
 </main>
@@ -169,7 +171,7 @@ footer{padding:24px 0 30px;border-top:1px solid var(--linha);text-align:center;f
 </div>
 
 <script>
-/* a barra fixa some quando o botão de verdade (o da Cakto) está na tela */
+/* a barra fixa some quando os botões estão na tela */
 (function () {
   var barra = document.getElementById('barra'), compra = document.getElementById('compra');
   document.querySelector('.barra a').addEventListener('click', function (e) {
@@ -182,39 +184,21 @@ footer{padding:24px 0 30px;border-top:1px solid var(--linha);text-align:center;f
   }, { threshold: 0.35 }).observe(compra);
 })();
 </script>
-<script src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
 <script>
-/* O upsell.js da Cakto escreve em português (o aviso de pagamento aprovado e o "Processando..." do botão).
-   Aqui a gente troca para o italiano assim que ele aparece. */
+/* Widget do Funil de Vendas da Hotmart (1 clique). Sem compra em andamento ele abre "pay.hotmart.com/funnel?undefined"
+   com erro: quem chega sem a query da Hotmart vê os botões de reserva, e se o widget não carregar em 8 s também. */
 (function () {
-  var trocas = [
-    [/^Pagamento aprovado$/, 'Pagamento confermato'],
-    [/^Obrigado por sua compra!$/, 'Grazie per l’acquisto!'],
-    [/^Você será redirecionado em (\d+) segundos?$/, 'Vi portiamo avanti tra $1 secondi'],
-    [/^Fechar$/, 'Chiudi'],
-    [/^Processando\.\.\.$/, 'Un attimo…'],
-    [/^Carregando\.\.\.$/, 'Un attimo…']
-  ];
-  function traduz(raiz) {
-    var w = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT), n;
-    while ((n = w.nextNode())) {
-      var t = n.nodeValue.trim();
-      if (!t) continue;
-      for (var i = 0; i < trocas.length; i++) {
-        if (trocas[i][0].test(t)) { n.nodeValue = t.replace(trocas[i][0], trocas[i][1]); break; }
-      }
-    }
-  }
-  function observa(raiz) {
-    new MutationObserver(function () { traduz(raiz); }).observe(raiz, { childList: true, subtree: true, characterData: true });
-  }
-  observa(document.body);
-  var tentativas = 0, espera = setInterval(function () {
-    document.querySelectorAll('cakto-upsell-accept,cakto-upsell-reject').forEach(function (el) {
-      if (el.shadowRoot && !el.__obs) { el.__obs = 1; observa(el.shadowRoot); }
-    });
-    if (++tentativas > 40) clearInterval(espera);
-  }, 250);
+  var reserva = document.getElementById('reserva'), carregou = false;
+  function mostraReserva(esconde) { reserva.hidden = false; if (esconde) document.getElementById('hotmart-sales-funnel').style.display = 'none'; }
+  if (!location.search) { mostraReserva(true); return; }
+  try {
+    checkoutElements.init('salesFunnel', {
+      onLoad: function () { carregou = true; },
+      onLoadDataError: function () { mostraReserva(true); }
+    }).mount('#hotmart-sales-funnel');
+  } catch (e) { mostraReserva(true); return; }
+  setTimeout(function () { if (!carregou) mostraReserva(false); }, 8000);
 })();
 </script>
 </body>
