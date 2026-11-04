@@ -42,18 +42,19 @@ footer{padding:28px 0 40px;border-top:1px solid var(--linha);text-align:center;f
   <div class="marca"><img src="../img/labios-320.webp" alt="" width="44" height="28"><b>Desideri di Coppia</b></div>
   <h1>Fatto. <em>Il gioco è vostro.</em></h1>
   <p class="sub">Ecco come aprirlo stasera.</p>
-  <p class="pro" id="pro">✓ Desideri Pro aggiunto al vostro ordine</p>
+  <p class="pro" id="pro" hidden>✓ Desideri Pro aggiunto al vostro ordine</p>
   <ol>
    <li><p><b>Aprite l'email di conferma.</b> Arriva all'indirizzo che avete scritto nel pagamento, di solito entro pochi minuti. Se non la vedete, cercate in Spam o in Promozioni.</p></li>
    <li><p><b>Toccate il link dal telefono.</b> Il gioco si apre nel browser, senza registrazione e senza scaricare niente.</p></li>
    <li><p><b>Aggiungetelo alla schermata Home.</b> Su iPhone: Condividi, poi "Aggiungi alla schermata Home". Su Android: i tre puntini, poi "Aggiungi a schermata Home". Così si apre come le altre app.</p></li>
   </ol>
+  <p class="sub">Iniziate dal livello Soft: la prima carta è già pronta.</p>
   <p class="aiuto">Dopo 15 minuti ancora niente? Rispondete all'email di conferma del pagamento o scrivete al contatto di assistenza che trovate lì.</p>
  </div>
 </main>
 <footer><div class="wrap">Desideri di Coppia · Vietato ai minori di 18 anni.</div></footer>
 <script>
-  if (/[?&]pro=1\b/.test(location.search)) document.getElementById('pro').className = 'pro si';
+  if (/[?&]pro=1\b/.test(location.search)) { var p = document.getElementById('pro'); p.hidden = false; p.className = 'pro si'; }
 </script>
 </body>
 </html>
