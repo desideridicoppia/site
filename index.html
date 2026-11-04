@@ -608,6 +608,16 @@ document.querySelector('.altri').addEventListener('click', function () {
   document.querySelectorAll('a.checkout').forEach(function (a) { if (a !== fixoA) ob.observe(a); });
   addEventListener('scroll', mostrar, { passive: true });
 })();
+/* clique no botão de compra: evento próprio no pixel (não InitiateCheckout, que o checkout da Hotmart já manda no mesmo pixel e duplicaria) */
+(function () {
+  var bs = document.querySelectorAll('a.checkout');
+  bs.forEach(function (a, i) {
+    a.addEventListener('click', function () {
+      var pos = a.closest('.fixo') ? 'barra' : a.closest('.hero') ? 'video' : a.closest('#offerta') ? 'offerta' : a.closest('.finale') ? 'finale' : 'pagina-' + i;
+      try { if (window.fbq) fbq('trackCustom', 'CliqueCheckout', { posizione: pos, content_name: 'Desideri di Coppia', value: 14.90, currency: 'EUR' }, { eventID: 'cc-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) }); } catch (e) {}
+    });
+  });
+})();
 /* o link do checkout leva junto os parâmetros do anúncio (utm, fbclid), para o rastreio fechar a venda */
 (function () {
   var q = location.search.slice(1);
