@@ -71,7 +71,7 @@ h3{font-size:24px;margin-bottom:6px}
 .faixa [data-oggi]:empty{display:none}
 .faixa .l2{margin-top:3px;font:600 13px/1.3 var(--sans);color:var(--vinho)}
 @media (max-width:370px){.faixa .l1{font-size:12.5px;gap:6px;letter-spacing:.01em}.faixa .l2{font-size:12px}}
-/* preço antigo riscado: sempre 50 € por 14,90 € */
+/* preço antigo riscado: 29,90 € por 14,90 € */
 s{color:var(--fumaca);text-decoration-color:var(--brasa);text-decoration-thickness:2px}
 .prima{font:600 30px/1 var(--serif);margin-top:16px}
 .prima+.prezzo{margin-top:4px}
@@ -272,7 +272,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
 </head>
 <body>
 
-<aside class="faixa" aria-label="Offerta del giorno"><div class="l1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Accesso a vita solo oggi <span data-oggi></span></div><div class="l2">Pagate una volta sola, niente abbonamento</div></aside>
+<aside class="faixa" aria-label="Accesso a vita"><div class="l1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Accesso a vita</div><div class="l2">Pagamento unico, niente abbonamento</div></aside>
 
 <header class="hero">
  <div class="wrap">
@@ -330,7 +330,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
     if (salvo > 5) { v.removeAttribute('autoplay'); v.pause(); caixa.hidden = true; rip.hidden = false; }
   })();
   </script>
-  <div class="preco-vsl"><s>50 €</s><b>14,90 €</b></div>
+  <div class="preco-vsl"><s>29,90 €</s><b>14,90 €</b></div>
   <a class="btn checkout" href="https://pay.hotmart.com/W108239351D?checkoutMode=10">Voglio giocare stasera</a>
   <div class="micro"><span>Pagamento unico</span><span>Niente da scaricare</span><span>30 giorni soddisfatti o rimborsati</span></div>
  </div>
@@ -450,16 +450,14 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
 
 <section class="tom-creme">
  <div class="wrap">
-  <div class="chapeu rivela">Le prime coppie che l'hanno provato</div>
+  <div class="chapeu rivela">Prova in anteprima</div>
   <h2 class="rivela">Cosa dicono <em>dopo la prima sera.</em></h2>
+  <p class="nota-anteprima rivela" style="margin:0 0 20px;font-size:14px;opacity:.75">Recensioni di coppie che hanno provato il gioco gratis prima del lancio.</p>
   <div class="commenti">
-   <div class="commento rivela"><span class="avatar" style="background:#b0123e">G</span><div class="nuvola"><div class="chi"><b>Giulia</b><span class="stelle">★★★★★</span></div><strong>Ci voleva proprio qualcosa di diverso!</strong>Io e il mio ragazzo stavamo un po’ entrando nella solita routine. Abbiamo provato l’app per curiosità e devo dire che ci siamo divertiti un sacco! Ci sono giochi romantici, ma anche sfide un po’ più piccanti 😏 È stato bello ritrovare un po’ di complicità e fare qualcosa di diverso insieme.</div></div>
-   <div class="commento rivela"><span class="avatar" style="background:#5a1026">M</span><div class="nuvola"><div class="chi"><b>Marco</b><span class="stelle">★★★★★</span></div><strong>Una bella sorpresa per entrambi</strong>L’ho presa più che altro per curiosità, senza aspettarmi chissà cosa. Invece è stata una bella sorpresa! I giochi sono semplici, divertenti e aiutano a rompere un po’ la routine. Alcune sfide ci hanno fatto ridere tantissimo, altre hanno creato dei momenti davvero speciali con la mia compagna.</div></div>
-   <div class="commento rivela"><span class="avatar" style="background:#9a6a43">A</span><div class="nuvola"><div class="chi"><b>Alessia</b><span class="stelle">★★★★★</span></div><strong>Finalmente qualcosa di diverso da fare insieme</strong>Dopo un po’ di anni insieme, ogni tanto si finisce per fare sempre le stesse cose. Quest’app ci ha dato qualche idea nuova per passare del tempo insieme, tra domande, giochi romantici e sfide più maliziose. Mi piace perché non è una cosa complicata e ci permette di divertirci senza prenderci troppo sul serio ❤️</div></div>
-   <div class="commento" hidden><span class="avatar" style="background:#2f5d8a">L</span><div class="nuvola"><div class="chi"><b>Luca</b><span class="stelle">★★★★★</span></div><strong>Più divertente di quanto pensassi</strong>All’inizio ero un po’ scettico, lo ammetto 😂 Pensavo fosse la solita app con due giochini messi lì. Invece ci sono diverse idee carine per le coppie, sia dolci che piccanti. L’abbiamo usata una sera per provare qualcosa di nuovo e alla fine ci siamo divertiti davvero. Consigliata!</div></div>
-   <div class="commento" hidden><span class="avatar" style="background:#c2410c">M</span><div class="nuvola"><div class="chi"><b>Martina</b><span class="stelle">★★★★★</span></div><strong>Ci ha aiutato a uscire dalla solita routine</strong>Mi piace l’idea di avere qualcosa che ci faccia staccare dalla quotidianità e pensare un po’ a noi due. Ci sono giochi teneri, domande interessanti e altre cose un po’ più audaci 😉 È un modo semplice per ridere, flirtare e ritrovare quella complicità che a volte, tra lavoro e impegni, si mette da parte.</div></div>
+   <div class="commento rivela"><span class="avatar" style="background:#b0123e">G</span><div class="nuvola"><div class="chi"><b>Giulia</b></div><strong>La carta ha chiesto al posto mio</strong>La sera del bacio a un palmo dalla bocca: abbiamo riso dieci minuti e poi… ve lo lascio immaginare. Non dovevo essere io a proporlo.</div></div>
+   <div class="commento rivela"><span class="avatar" style="background:#5a1026">M</span><div class="nuvola"><div class="chi"><b>Marco</b></div><strong>Meno imbarazzo, più gioco</strong>Odio dover chiedere e sentirmi dire di no. Qui gira la carta e tocca a entrambi. Soft all’inizio, poi si scala quando volete.</div></div>
+   <div class="commento rivela"><span class="avatar" style="background:#9a6a43">A</span><div class="nuvola"><div class="chi"><b>Alessia</b></div><strong>Match: solo ciò che vogliamo tutti e due</strong>Abbiamo risposto in segreto. È uscito solo quello in comune. Niente esposizione, una serata che non finisce sul divano col telefono.</div></div>
   </div>
-  <button type="button" class="altri">Mostra altri 2 commenti</button>
  </div>
 </section>
 
@@ -481,7 +479,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
  <div class="wrap">
   <div class="cartellino rivela">
    <img class="copertina" src="img/gioco-completo.webp" alt="Desideri di Coppia sul telefono" width="600" height="500" loading="lazy">
-   <div class="prima"><s>50 €</s></div>
+   <div class="prima"><s>29,90 €</s></div>
    <div class="prezzo">14,90<small> €</small></div>
    <p class="unico">Pagamento unico · Vostro per sempre</p>
    <p class="ancora">Meno di un aperitivo in due.</p>
@@ -505,7 +503,7 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
  <div class="wrap">
   <h2>Domande <em>frequenti</em></h2>
   <details><summary>Come lo ricevo?</summary><p>Subito dopo il pagamento arriva un'email con il link. Si apre dal browser del telefono, su iPhone e su Android, e si può aggiungere alla schermata Home come un'app.</p></details>
-  <details><summary>È un abbonamento?</summary><p>No. Pagate una volta sola, <s>50 €</s> 14,90 €, e il gioco resta vostro. Nessun rinnovo.</p></details>
+  <details><summary>È un abbonamento?</summary><p>No. Pagate una volta sola, <s>29,90 €</s> 14,90 €, e il gioco resta vostro. Nessun rinnovo.</p></details>
   <details><summary>Si gioca in due sullo stesso telefono?</summary><p>Sì, a turno, passandovi il telefono. Nel Match ognuno risponde senza vedere le risposte dell'altra persona.</p></details>
   <details><summary>Quanto è spinto?</summary><p>Lo decidete voi. Soft è per ridere, Romantico è coccole e baci, Piccante arriva a carezze, provocazioni e camera da letto. Chi vuole andare oltre trova il livello Senza Censura, che si può aggiungere al momento dell'acquisto.</p></details>
   <details><summary>Posso regalarlo?</summary><p>Sì. Il link arriva alla vostra email: potete inoltrarlo al partner o aprire il gioco insieme. Si apre da qualsiasi telefono, senza registrazione.</p></details>
@@ -522,14 +520,14 @@ footer nav{display:flex;justify-content:center;gap:18px;margin-bottom:12px}
 <section class="finale">
  <div class="wrap">
   <h2 class="rivela">Stasera, invece del telefono, girate una carta. <em>E vedete dove vi porta.</em></h2>
-  <p class="sub" style="margin-bottom:24px">5 giochi, più di 2.000 carte, 3 livelli. <s>50 €</s> 14,90 € una volta sola.</p>
+  <p class="sub" style="margin-bottom:24px">5 giochi, più di 2.000 carte, 3 livelli. <s>29,90 €</s> 14,90 € una volta sola.</p>
   <a class="btn checkout" href="https://pay.hotmart.com/W108239351D?checkoutMode=10">Voglio giocare stasera</a>
   <div class="micro"><span>Pagamento unico</span><span>Niente da scaricare</span><span>30 giorni soddisfatti o rimborsati</span></div>
  </div>
 </section>
 </main>
 
-<aside class="fixo" aria-label="Acquista i giochi" aria-hidden="true"><div class="fixo-in"><div class="fp"><s>50 €</s><b>14,90 €</b></div><a class="btn checkout" href="https://pay.hotmart.com/W108239351D?checkoutMode=10" tabindex="-1">Voglio giocare stasera</a></div></aside>
+<aside class="fixo" aria-label="Acquista i giochi" aria-hidden="true"><div class="fixo-in"><div class="fp"><s>29,90 €</s><b>14,90 €</b></div><a class="btn checkout" href="https://pay.hotmart.com/W108239351D?checkoutMode=10" tabindex="-1">Voglio giocare stasera</a></div></aside>
 
 <footer>
  <div class="wrap">
@@ -586,16 +584,7 @@ document.querySelector('.copia').addEventListener('click', function () {
   if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok, seleciona); else seleciona();
 });
 /* depoimentos: os dois últimos aparecem no toque */
-document.querySelector('.altri').addEventListener('click', function () {
-  document.querySelectorAll('.commento[hidden]').forEach(function (c) { c.hidden = false; c.classList.add('visto'); });
-  this.remove();
-});
-/* data da faixa: hoje no fuso da Itália, conferida a cada minuto para virar à meia-noite */
-(function () {
-  var oggi = document.querySelector('[data-oggi]');
-  function data() { try { oggi.textContent = new Intl.DateTimeFormat('it-IT', { timeZone: 'Europe/Rome', day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date()); } catch (e) {} }
-  data(); setInterval(data, 60000);
-})();
+
 /* botão fixo: aparece quando nenhum botão de compra da página está na tela */
 (function () {
   var fixo = document.querySelector('.fixo'), fixoA = fixo.querySelector('a'), vistos = 0;
