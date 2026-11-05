@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Depoimenti da incollare nel checkout Hotmart</title>
+<style>
+  body{margin:0;background:#efeae6;color:#2a1118;font:15px/1.45 system-ui,sans-serif}
+  .nota{max-width:440px;margin:0 auto;padding:18px 16px 0;font-size:13px;color:#5c4038}
+  .nota code{font-size:12px}
+</style>
+</head>
+<body>
+<p class="nota">Anteprima locale. Nel checkout si incolla solo il blocco segnato qui sotto, nel prodotto <code>W108239351D</code>. I testi sono l’inizio dei depoimenti della landing, non recensioni nuove.</p>
+
+<!-- INIZIO BLOCCO DA INCOLLARE
+     Hotmart → app.hotmart.com → menu dei 9 punti → Ferramentas → Ver todas
+     → Aparência da Página de Pagamento → prodotto del checkout W108239351D.
+     Nuovo componente sotto l’immagine in alto e sopra gli order bump.
+     Se c’è un componente HTML, incolla da qui fino a FINE BLOCCO.
+     Il componente Texto (Quill, hotpay-text) cancella avatar e CSS:
+     in quel caso incolla solo il blocco .dc-quill e lascia sfondo bianco, senza bordo.
+     Non toccare i metodi di pagamento. Pubblica la pagina già in uso
+     e ripeti il blocco anche nella versione desktop (icona del monitor). -->
+<style>
+  .dc-commenti{box-sizing:border-box;max-width:440px;margin:0 auto;padding:4px 0 8px;color:#2a1118;font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+  .dc-commenti *{box-sizing:border-box}
+  .dc-commenti h2{margin:0 0 12px;font:italic 600 26px/1.1 Georgia,serif;color:#3d0b1a}
+  .dc-commenti article{display:flex;gap:10px;margin:0 0 10px;padding:12px;background:#fff;border:1px solid rgba(61,11,26,.14);border-radius:16px}
+  .dc-commenti .av{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#b0123e;color:#fff;font:700 16px/1 system-ui,sans-serif}
+  .dc-commenti article:nth-child(3) .av{background:#5a1026}
+  .dc-commenti article:nth-child(4) .av{background:#9a6a43}
+  .dc-commenti .chi{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+  .dc-commenti .chi b{font:700 15px/1.2 system-ui,sans-serif}
+  .dc-commenti .stelle{color:#a67c2d;letter-spacing:.12em;font-size:12px}
+  .dc-commenti h3{margin:4px 0 4px;font:italic 600 17px/1.25 Georgia,serif}
+  .dc-commenti p{margin:0}
+  .dc-quill{display:none}
+</style>
+<div class="dc-commenti">
+  <h2>Dopo la prima sera</h2>
+  <article>
+    <span class="av" aria-hidden="true">G</span>
+    <div>
+      <div class="chi"><b>Giulia</b><span class="stelle" aria-label="5 stelle su 5">★★★★★</span></div>
+      <h3>Ci voleva proprio qualcosa di diverso!</h3>
+      <p>Io e il mio ragazzo stavamo un po’ entrando nella solita routine. Abbiamo provato l’app per curiosità e devo dire che ci siamo divertiti un sacco!</p>
+    </div>
+  </article>
+  <article>
+    <span class="av" aria-hidden="true">M</span>
+    <div>
+      <div class="chi"><b>Marco</b><span class="stelle" aria-label="5 stelle su 5">★★★★★</span></div>
+      <h3>Una bella sorpresa per entrambi</h3>
+      <p>L’ho presa più che altro per curiosità, senza aspettarmi chissà cosa. Invece è stata una bella sorpresa!</p>
+    </div>
+  </article>
+  <article>
+    <span class="av" aria-hidden="true">A</span>
+    <div>
+      <div class="chi"><b>Alessia</b><span class="stelle" aria-label="5 stelle su 5">★★★★★</span></div>
+      <h3>Finalmente qualcosa di diverso da fare insieme</h3>
+      <p>Quest’app ci ha dato qualche idea nuova per passare del tempo insieme, tra domande, giochi romantici e sfide più maliziose.</p>
+    </div>
+  </article>
+</div>
+<!-- FINE BLOCCO DA INCOLLARE -->
+
+<!-- Versione per il componente Texto (Quill), se l’HTML sopra viene spogliato.
+     Stessi tre testi. Sfondo del componente: bianco, senza bordo. -->
+<div class="dc-quill">
+  <p><strong>Giulia</strong> ★★★★★<br><em>Ci voleva proprio qualcosa di diverso!</em><br>Io e il mio ragazzo stavamo un po’ entrando nella solita routine. Abbiamo provato l’app per curiosità e devo dire che ci siamo divertiti un sacco!</p>
+  <p><strong>Marco</strong> ★★★★★<br><em>Una bella sorpresa per entrambi</em><br>L’ho presa più che altro per curiosità, senza aspettarmi chissà cosa. Invece è stata una bella sorpresa!</p>
+  <p><strong>Alessia</strong> ★★★★★<br><em>Finalmente qualcosa di diverso da fare insieme</em><br>Quest’app ci ha dato qualche idea nuova per passare del tempo insieme, tra domande, giochi romantici e sfide più maliziose.</p>
+</div>
+</body>
+</html>
