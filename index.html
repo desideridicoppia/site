@@ -57,7 +57,7 @@ h1 em,h2 em{font-style:italic;color:var(--champ)}
 .btn{display:flex;align-items:center;justify-content:center;width:100%;max-width:440px;min-height:56px;padding:16px 22px;border-radius:999px;text-decoration:none;color:#fff;font:600 italic 22px/1.1 var(--serif);background:linear-gradient(180deg,#c31848,#6e0c28);border:1px solid rgba(233,185,143,.4);box-shadow:0 16px 32px -18px rgba(176,18,62,.95)}
 .btn:hover{filter:brightness(1.06)}
 .btn:active{transform:translateY(1px)}
-.btn:focus-visible,summary:focus-visible,.livelli button:focus-visible{outline:2px solid var(--champ);outline-offset:3px}
+.btn:focus-visible,summary:focus-visible,.livelli button:focus-visible,.altri:focus-visible{outline:2px solid var(--champ);outline-offset:3px}
 .micro{margin-top:12px;color:var(--fumaca);font-size:14px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding:0;list-style:none}
 .chips li{font-size:13px;padding:8px 12px;border-radius:999px;border:1px solid var(--linea);color:#f3e4dc}
@@ -107,8 +107,13 @@ h1 em,h2 em{font-style:italic;color:var(--champ)}
 .carta .turno{margin-top:14px;font-size:13px;color:#8c7076}
 .nota{margin-top:14px;color:var(--fumaca);font-size:15px}
 .giochi-tit{margin:36px 0 8px;font:600 28px/1.1 var(--serif)}
-.giochi{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 20px 16px;margin:0 -20px;list-style:none}
-.giochi li{scroll-snap-align:start;flex:none;width:min(64vw,210px)}
+/* esteira: a faixa é mais larga que a tela e desliza para o lado. scroll-behavior auto porque o html herda smooth e isso trava o scrollLeft. proximity, não mandatory: um gesto curto não volta sozinho para o início */
+.giochi{display:flex;gap:14px;width:calc(100% + 40px);margin:0 -20px;padding:6px 20px 16px;min-width:0;list-style:none;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scroll-behavior:auto;scroll-snap-type:x proximity;scroll-padding-inline:20px;-webkit-overflow-scrolling:touch;touch-action:pan-y;cursor:grab;user-select:none;scrollbar-width:thin;scrollbar-color:rgba(233,185,143,.55) transparent}
+.giochi::-webkit-scrollbar{height:8px}
+.giochi::-webkit-scrollbar-thumb{background:rgba(233,185,143,.5);border-radius:99px}
+.giochi.is-drag{cursor:grabbing}
+.giochi li{scroll-snap-align:start;flex:0 0 auto;width:min(64vw,210px);min-width:min(64vw,210px)}
+.giochi img{-webkit-user-drag:none;user-select:none}
 .tel{position:relative;padding:8px 8px 10px;border-radius:28px;background:linear-gradient(155deg,#9aa0a8 0%,#2c3036 32%,#0d0e11 62%,#4a4e56 100%);box-shadow:0 22px 40px -24px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.28)}
 .tel::before{content:"";position:absolute;left:1px;top:24%;width:3px;height:34px;border-radius:2px;background:#6a6f76}
 .tel img{width:100%;height:auto;border-radius:20px;background:#14080f}
@@ -166,6 +171,24 @@ footer{padding:28px 0 36px;border-top:1px solid var(--linea);text-align:center;f
 footer nav{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:10px}
 footer a{text-decoration:underline;text-underline-offset:3px}
 
+/* depoimenti: tre in vista, gli altri due al tocco */
+.voci{list-style:none;display:grid;gap:12px}
+.voce{padding:16px 16px 18px;border-radius:18px;background:var(--noite-2);border:1px solid var(--linea);display:flex;flex-direction:column}
+.voce header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.iniziale{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--carmim);color:#fff;font:700 15px/1 var(--sans)}
+.voce:nth-child(2) .iniziale{background:#5a1026}
+.voce:nth-child(3) .iniziale{background:#9a6a43}
+.voce:nth-child(4) .iniziale{background:#6e0c28}
+.voce:nth-child(5) .iniziale{background:#a77a50;color:var(--noite)}
+.voce header b{font:600 22px/1 var(--serif);color:var(--champ-2)}
+.stelle{margin-left:auto;color:var(--champ);letter-spacing:.14em;font-size:13px;line-height:1}
+.voce h3{font:600 italic 22px/1.2 var(--serif);margin:0 0 8px;color:#fff}
+.voce p{margin:0;font-size:15px;line-height:1.45;color:#f3e4dc}
+.voce[hidden]{display:none}
+.altri{display:block;margin:16px auto 0;padding:12px 18px;border-radius:999px;border:1px solid var(--linea);background:transparent;color:var(--champ-2);font:700 14px/1 var(--sans);cursor:pointer}
+.altri:hover{border-color:rgba(233,185,143,.55)}
+.altri[hidden]{display:none}
+
 @media (min-width:900px){
   .hero{padding-top:48px}
   .hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(300px,.9fr);gap:48px}
@@ -175,8 +198,12 @@ footer a{text-decoration:underline;text-underline-offset:3px}
   .dolori{grid-template-columns:1fr 1fr}
   .svolta-grid,.come-grid{grid-template-columns:1.15fr .85fr;gap:48px}
   .come-tel{margin:0}
-  .giochi{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible;margin:0;padding:6px 0 0}
-  .giochi li{width:auto}
+  .giochi{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:auto;overflow:visible;margin:0;padding:6px 0 0;cursor:auto;touch-action:auto;scroll-snap-type:none}
+  .giochi li{width:auto;min-width:0}
+  .voci{grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch}
+  .voce{grid-column:span 2}
+  .voci:has(> .voce:nth-child(5):not([hidden])) > .voce:nth-child(4){grid-column:2 / span 2}
+  .voci:has(> .voce:nth-child(5):not([hidden])) > .voce:nth-child(5){grid-column:4 / span 2}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -310,6 +337,40 @@ footer a{text-decoration:underline;text-underline-offset:3px}
   </div>
 </section>
 
+<section aria-labelledby="voci-titolo">
+  <div class="wrap">
+    <h2 id="voci-titolo">Cosa dicono <em>dopo la prima sera.</em></h2>
+    <ul class="voci">
+      <li class="voce">
+        <header><span class="iniziale" aria-hidden="true">G</span><b>Giulia</b><span class="stelle" aria-label="5 stelle su 5">★★★★★</span></header>
+        <h3>Ci voleva proprio qualcosa di diverso!</h3>
+        <p>Io e il mio ragazzo stavamo un po’ entrando nella solita routine. Abbiamo provato l’app per curiosità e devo dire che ci siamo divertiti un sacco! Ci sono giochi romantici, ma anche sfide un po’ più piccanti 😏 È stato bello ritrovare un po’ di complicità e fare qualcosa di diverso insieme.</p>
+      </li>
+      <li class="voce">
+        <header><span class="iniziale" aria-hidden="true">M</span><b>Marco</b><span class="stelle" aria-label="5 stelle su 5">★★★★★</span></header>
+        <h3>Una bella sorpresa per entrambi</h3>
+        <p>L’ho presa più che altro per curiosità, senza aspettarmi chissà cosa. Invece è stata una bella sorpresa! I giochi sono semplici, divertenti e aiutano a rompere un po’ la routine. Alcune sfide ci hanno fatto ridere tantissimo, altre hanno creato dei momenti davvero speciali con la mia compagna.</p>
+      </li>
+      <li class="voce">
+        <header><span class="iniziale" aria-hidden="true">A</span><b>Alessia</b><span class="stelle" aria-label="5 stelle su 5">★★★★★</span></header>
+        <h3>Finalmente qualcosa di diverso da fare insieme</h3>
+        <p>Dopo un po’ di anni insieme, ogni tanto si finisce per fare sempre le stesse cose. Quest’app ci ha dato qualche idea nuova per passare del tempo insieme, tra domande, giochi romantici e sfide più maliziose. Mi piace perché non è una cosa complicata e ci permette di divertirci senza prenderci troppo sul serio ❤️</p>
+      </li>
+      <li class="voce" hidden>
+        <header><span class="iniziale" aria-hidden="true">L</span><b>Luca</b><span class="stelle" aria-label="5 stelle su 5">★★★★★</span></header>
+        <h3>Più divertente di quanto pensassi</h3>
+        <p>All’inizio ero un po’ scettico, lo ammetto 😂 Pensavo fosse la solita app con due giochini messi lì. Invece ci sono diverse idee carine per le coppie, sia dolci che piccanti. L’abbiamo usata una sera per provare qualcosa di nuovo e alla fine ci siamo divertiti davvero. Consigliata!</p>
+      </li>
+      <li class="voce" hidden>
+        <header><span class="iniziale" aria-hidden="true">M</span><b>Martina</b><span class="stelle" aria-label="5 stelle su 5">★★★★★</span></header>
+        <h3>Ci ha aiutato a uscire dalla solita routine</h3>
+        <p>Mi piace l’idea di avere qualcosa che ci faccia staccare dalla quotidianità e pensare un po’ a noi due. Ci sono giochi teneri, domande interessanti e altre cose un po’ più audaci 😉 È un modo semplice per ridere, flirtare e ritrovare quella complicità che a volte, tra lavoro e impegni, si mette da parte.</p>
+      </li>
+    </ul>
+    <button type="button" class="altri" id="altri-commenti">Mostra altri 2 commenti</button>
+  </div>
+</section>
+
 <section class="offerta" id="offerta">
   <div class="wrap">
     <div class="box">
@@ -437,6 +498,86 @@ footer a{text-decoration:underline;text-underline-offset:3px}
       sync(visti);
     }, { threshold: 0.35 });
     btns.forEach(function (a) { io.observe(a); });
+  }
+
+  /* esteira dos 5 jogos, abaixo de 900px: dedo, roda e arrasto deslizam na horizontal. No desktop vira grelha e isto não faz nada. */
+  var faixa = document.querySelector('.giochi');
+  if (faixa) {
+    var larga = window.matchMedia('(min-width: 900px)');
+    function podeDeslizar() {
+      return !larga.matches && faixa.scrollWidth > faixa.clientWidth + 1;
+    }
+    faixa.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    faixa.addEventListener('wheel', function (e) {
+      if (!podeDeslizar()) return;
+      var dx = e.deltaX, dy = e.deltaY;
+      if (e.deltaMode === 1) { dx *= 16; dy *= 16; }
+      else if (e.deltaMode === 2) { dx *= faixa.clientWidth; dy *= faixa.clientWidth; }
+      if (Math.abs(dx) > Math.abs(dy)) return;
+      if (!dy) return;
+      var max = faixa.scrollWidth - faixa.clientWidth;
+      var noInicio = faixa.scrollLeft <= 0 && dy < 0;
+      var noFim = faixa.scrollLeft >= max - 1 && dy > 0;
+      if (noInicio || noFim) return;
+      e.preventDefault();
+      faixa.scrollLeft += dy;
+    }, { passive: false });
+    var toque = null;
+    faixa.addEventListener('touchstart', function (e) {
+      if (!podeDeslizar() || e.touches.length !== 1) return;
+      var t = e.touches[0];
+      toque = { x: t.clientX, y: t.clientY, left: faixa.scrollLeft, eixo: '' };
+    }, { passive: true });
+    faixa.addEventListener('touchmove', function (e) {
+      if (!toque || e.touches.length !== 1) return;
+      var t = e.touches[0];
+      var dx = t.clientX - toque.x, dy = t.clientY - toque.y;
+      if (!toque.eixo) {
+        if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+        toque.eixo = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      }
+      if (toque.eixo !== 'x') return;
+      if (e.cancelable) e.preventDefault();
+      faixa.scrollLeft = toque.left - dx;
+    }, { passive: false });
+    faixa.addEventListener('touchend', function () { toque = null; });
+    faixa.addEventListener('touchcancel', function () { toque = null; });
+    var arrasto = null;
+    faixa.addEventListener('pointerdown', function (e) {
+      if (!podeDeslizar() || e.pointerType === 'touch' || e.button !== 0) return;
+      arrasto = { id: e.pointerId, x: e.clientX, left: faixa.scrollLeft, moved: false };
+      faixa.classList.add('is-drag');
+      faixa.setPointerCapture(e.pointerId);
+    });
+    faixa.addEventListener('pointermove', function (e) {
+      if (!arrasto || e.pointerId !== arrasto.id) return;
+      var dx = e.clientX - arrasto.x;
+      if (Math.abs(dx) > 4) arrasto.moved = true;
+      faixa.scrollLeft = arrasto.left - dx;
+    });
+    function solta(e) {
+      if (!arrasto || e.pointerId !== arrasto.id) return;
+      faixa.classList.remove('is-drag');
+      if (arrasto.moved) {
+        var bloqueia = function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          faixa.removeEventListener('click', bloqueia, true);
+        };
+        faixa.addEventListener('click', bloqueia, true);
+      }
+      arrasto = null;
+    }
+    faixa.addEventListener('pointerup', solta);
+    faixa.addEventListener('pointercancel', solta);
+  }
+
+  var altri = document.getElementById('altri-commenti');
+  if (altri) {
+    altri.addEventListener('click', function () {
+      document.querySelectorAll('.voce[hidden]').forEach(function (el) { el.hidden = false; });
+      altri.hidden = true;
+    });
   }
 
   var q = location.search.replace(/^\?/, '');
